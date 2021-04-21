@@ -5,9 +5,9 @@ import com.service.RequestStatus
 import com.service.livedata.ActionData
 import com.service.model.ErrorResponse
 
-open class BaseComicViewModel : BaseViewModel() {
+open class TCViewModel : BaseViewModel() {
 
-    fun <T> getErrorRequestComic(response: ComicApiResponse<T>): ActionData<T> {
+    fun <T> getErrorRequestTC(response: TCApiResponse<T>): ActionData<T> {
         return when (response.errorCode) {
             RequestStatus.NO_INTERNET_CONNECTION.value -> {
                 ActionData(

@@ -6,9 +6,10 @@ package com.loitp.service
  * Ho Chi Minh City, VN
  * www.muathu@gmail.com
  */
-class ComicApiConfiguration {
+class TCApiConfiguration {
     companion object {
         // authentication
+        //TODO gradle
         const val BASE_URL = "https://api.docngontinh.com/"
 
         // API Param

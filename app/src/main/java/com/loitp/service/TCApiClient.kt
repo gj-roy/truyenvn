@@ -17,9 +17,9 @@ import java.util.concurrent.TimeUnit
  * Ho Chi Minh City, VN
  * www.muathu@gmail.com
  */
-object ComicApiClient {
+object TCApiClient {
 
-    private fun getBaseUrl() = ComicApiConfiguration.BASE_URL
+    private fun getBaseUrl() = TCApiConfiguration.BASE_URL
     private var restRequestInterceptor: RestRequestInterceptor? = null
 
     private fun getClient(url: String): Retrofit {
@@ -36,9 +36,9 @@ object ComicApiClient {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         builder.apply {
-            connectTimeout(ComicApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
-            readTimeout(ComicApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
-            writeTimeout(ComicApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
+            connectTimeout(TCApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
+            readTimeout(TCApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
+            writeTimeout(TCApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
             //addInterceptor(AuthenticationInterceptor())
             addInterceptor(logging)
             restRequestInterceptor?.let { rri ->
@@ -60,18 +60,18 @@ object ComicApiClient {
         }.build()
     }
 
-    val apiService = getClient(getBaseUrl()).create(ComicApiService::class.java)
+    val apiService = getClient(getBaseUrl()).create(TCApiService::class.java)
 
     fun addHeader(name: String, value: String) {
         restRequestInterceptor?.addHeader(name, value)
     }
 
     fun addAuthorization(token: String) {
-        addHeader(ComicApiConfiguration.AUTHORIZATION_HEADER, token)
+        addHeader(TCApiConfiguration.AUTHORIZATION_HEADER, token)
     }
 
     fun removeAuthorization() {
-        removeHeader(ComicApiConfiguration.AUTHORIZATION_HEADER)
+        removeHeader(TCApiConfiguration.AUTHORIZATION_HEADER)
     }
 
     fun removeHeader(name: String) {

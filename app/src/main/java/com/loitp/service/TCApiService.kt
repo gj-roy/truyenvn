@@ -7,10 +7,10 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface ComicApiService {
+interface TCApiService {
 
     @POST("login/")
     fun loginAsync(
         @Body requestLogin: RequestLogin
-    ): Deferred<Response<ComicApiResponse<Login>>>
+    ): Deferred<Response<TCApiResponse<Login>>>
 }

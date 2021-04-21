@@ -9,14 +9,14 @@ import com.model.RequestLogin
  * Ho Chi Minh City, VN
  * www.muathu@gmail.com
  */
-class ComicRepository(private val comicApiService: ComicApiService) : ComicBaseRepository() {
+class TCRepository(private val TCApiService: TCApiService) : TCBaseRepository() {
 
-    suspend fun login(email: String, password: String): ComicApiResponse<Login> = makeApiCall {
+    suspend fun login(email: String, password: String): TCApiResponse<Login> = makeApiCall {
         val requestLogin = RequestLogin(
             email = email,
             password = password
         )
-        comicApiService.loginAsync(
+        TCApiService.loginAsync(
             requestLogin = requestLogin
         ).await()
     }

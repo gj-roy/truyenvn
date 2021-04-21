@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import com.annotation.LogTag
 import com.core.base.BaseFragment
-import com.core.helper.mup.comic.ui.activity.ComicActivity
 import com.core.utilities.LActivityUtil
 import com.core.utilities.LDialogUtil
 import com.core.utilities.LUIUtil

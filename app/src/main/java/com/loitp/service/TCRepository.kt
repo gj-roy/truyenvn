@@ -1,7 +1,7 @@
 package com.loitp.service
 
-import com.model.Login
-import com.model.RequestLogin
+import com.loitp.model.Login
+import com.loitp.model.RequestLogin
 
 /**
  * Created by Loitp on 24,December,2019

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/green"
+    android:foreground="?selectableItemBackground"
+    android:orientation="vertical"
+    tools:ignore="UnusedAttribute">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_medium"
+        android:textColor="?attr/themeTextColor"
+        android:textSize="@dimen/txt_medium"
+        tools:text="@string/app_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAboutMe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_medium"
+        android:textColor="@color/red"
+        android:textSize="@dimen/txt_medium"
+        tools:text="@string/app_name" />
+</LinearLayout>

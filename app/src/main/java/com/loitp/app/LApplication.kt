@@ -12,7 +12,7 @@ import com.loitp.R
 //TODO gen keystore again
 //TODO admob
 //done
-//TODO link link_cover string
+//TODO done link link_cover string
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {

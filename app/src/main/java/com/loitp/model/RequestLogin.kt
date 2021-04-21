@@ -1,4 +1,4 @@
-package com.model
+package com.loitp.model
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.Expose

@@ -4,7 +4,7 @@ import com.annotation.LogTag
 import com.loitp.service.TCApiClient
 import com.loitp.service.TCRepository
 import com.loitp.service.TCViewModel
-import com.model.Login
+import com.loitp.model.Login
 import com.service.livedata.ActionData
 import com.service.livedata.ActionLiveData
 import kotlinx.coroutines.launch

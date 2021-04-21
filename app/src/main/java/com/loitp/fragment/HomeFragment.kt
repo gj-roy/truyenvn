@@ -57,8 +57,8 @@ class HomeFragment : BaseFragment() {
                 }
             })
 
-            mvm.listStoryLiveData.observe(viewLifecycleOwner, Observer { listTC ->
-                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(listTC))
+            mvm.listStoryLiveData.observe(viewLifecycleOwner, Observer { listStory ->
+                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(listStory))
             })
         }
 

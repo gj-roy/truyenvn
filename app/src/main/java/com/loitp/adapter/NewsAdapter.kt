@@ -1,4 +1,4 @@
-package vn.loitp.app.activity.customviews.recyclerview.concatadapter.adapter
+package com.loitp.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.annotation.LogTag
 import com.core.adapter.BaseAdapter
+import com.core.base.BaseApplication
 import com.core.utilities.LImageUtil
 import com.loitp.R
 import com.loitp.model.News
@@ -21,6 +22,7 @@ class NewsAdapter(
 
     fun addData(listNews: ArrayList<News>) {
         this.listNews.addAll(listNews)
+        logD("loitpp addData " + BaseApplication.gson.toJson(this.listNews))
         notifyDataSetChanged()
     }
 

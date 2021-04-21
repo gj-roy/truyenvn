@@ -22,7 +22,6 @@ class NewsAdapter(
 
     fun addData(listNews: ArrayList<News>) {
         this.listNews.addAll(listNews)
-        logD("loitpp addData " + BaseApplication.gson.toJson(this.listNews))
         notifyDataSetChanged()
     }
 

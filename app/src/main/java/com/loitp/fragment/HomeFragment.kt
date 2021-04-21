@@ -120,7 +120,6 @@ class HomeFragment : BaseFragment() {
                 )
                 listNews.add(news)
             }
-            logD("loitpp genNewsData " + BaseApplication.gson.toJson(listNews))
             concatAdapter.removeAdapter(loadingAdapter)
             newsAdapter?.addData(listNews)
         }

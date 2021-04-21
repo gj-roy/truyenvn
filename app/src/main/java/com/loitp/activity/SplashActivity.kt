@@ -88,7 +88,7 @@ class SplashActivity : BaseFontActivity() {
 
     private fun goToHome() {
         if (isAnimDone && isCheckReadyDone) {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, ComicLoginActivity::class.java)
             startActivity(intent)
             LActivityUtil.tranIn(this)
             this.finishAfterTransition()

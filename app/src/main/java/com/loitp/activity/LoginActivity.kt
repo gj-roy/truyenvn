@@ -9,6 +9,7 @@ import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
 import com.core.utilities.LActivityUtil
 import com.core.utilities.LValidateUtil
+import com.loitp.BuildConfig
 import com.loitp.R
 import com.loitp.service.TCApiClient
 import com.loitp.viewmodels.LoginViewModel
@@ -30,11 +31,9 @@ class LoginActivity : BaseFontActivity() {
         setupViews()
         setupViewModels()
 
-        //hard code login
-        //TODO gradle it
         loginViewModel?.login(
-            email = "appmb@truyentranhvn.org",
-            password = "appmb@truyentranhvn.org"
+            email = BuildConfig.EMAIL,
+            password = BuildConfig.PW
         )
 
         LValidateUtil.isValidPackageName()

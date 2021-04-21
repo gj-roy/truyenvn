@@ -1,5 +1,7 @@
 package com.loitp.service
 
+import com.loitp.BuildConfig
+
 /**
  * Created by Loitp on 24,December,2019
  * HMS Ltd
@@ -9,8 +11,7 @@ package com.loitp.service
 class TCApiConfiguration {
     companion object {
         // authentication
-        //TODO gradle
-        const val BASE_URL = "https://api.docngontinh.com/"
+        const val BASE_URL = BuildConfig.BASE_URL
 
         // API Param
         const val AUTHORIZATION_HEADER = "Authorization"

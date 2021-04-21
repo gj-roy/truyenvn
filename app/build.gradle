@@ -23,6 +23,11 @@ android {
                 includeCompileClasspath true
             }
         }
+
+        buildConfigField("String", "BASE_URL", BASE_URL)
+        buildConfigField("String", "EMAIL", EMAIL)
+        buildConfigField("String", "PW", PW)
+
     }
 
     dataBinding {

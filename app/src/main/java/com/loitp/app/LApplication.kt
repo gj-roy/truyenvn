@@ -9,10 +9,10 @@ import com.data.ActivityData
 import com.data.AdmobData
 import com.loitp.R
 
-//done
-//TODO link link_cover string
 //TODO gen keystore again
 //TODO admob
+//done
+//TODO link link_cover string
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {

@@ -10,7 +10,7 @@ import com.service.model.ErrorResponse
  * Ho Chi Minh City, VN
  * www.muathu@gmail.com
  */
-data class TCApiResponse<T>(
+data class StoryApiResponse<T>(
 
         @SerializedName("total")
         @Expose

@@ -15,12 +15,14 @@ import com.loitp.adapter.BannerAdapter
 import com.loitp.adapter.LoadingAdapter
 import com.loitp.adapter.NewsAdapter
 import com.loitp.model.News
+import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.frm_home.*
 
 //TODO refresh layout
 @LogTag("HomeFragment")
 class HomeFragment : BaseFragment() {
+
     private var concatAdapter = ConcatAdapter()
     private var bannerAdapter: BannerAdapter? = null
     private var newsAdapter: NewsAdapter? = null
@@ -32,6 +34,8 @@ class HomeFragment : BaseFragment() {
 
         setupViews()
         setupViewModels()
+
+        mainViewModel?.getListStory(StoryApiConfiguration.PAGE_SIZE, 0)
     }
 
     override fun setLayoutResourceId(): Int {
@@ -53,9 +57,9 @@ class HomeFragment : BaseFragment() {
                 }
             })
 
-//            mvm.listChapLiveData.observe(viewLifecycleOwner, Observer { listChap ->
-//                logD("<<<listChapLiveData " + BaseApplication.gson.toJson(listChap))
-//            })
+            mvm.listStoryLiveData.observe(viewLifecycleOwner, Observer { listTC ->
+                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(listTC))
+            })
         }
 
     }

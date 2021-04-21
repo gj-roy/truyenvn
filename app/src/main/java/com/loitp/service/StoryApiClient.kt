@@ -17,9 +17,9 @@ import java.util.concurrent.TimeUnit
  * Ho Chi Minh City, VN
  * www.muathu@gmail.com
  */
-object TCApiClient {
+object StoryApiClient {
 
-    private fun getBaseUrl() = TCApiConfiguration.BASE_URL
+    private fun getBaseUrl() = StoryApiConfiguration.BASE_URL
     private var restRequestInterceptor: RestRequestInterceptor? = null
 
     private fun getClient(url: String): Retrofit {
@@ -36,9 +36,9 @@ object TCApiClient {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         builder.apply {
-            connectTimeout(TCApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
-            readTimeout(TCApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
-            writeTimeout(TCApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
+            connectTimeout(StoryApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
+            readTimeout(StoryApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
+            writeTimeout(StoryApiConfiguration.TIME_OUT, TimeUnit.SECONDS)
             //addInterceptor(AuthenticationInterceptor())
             addInterceptor(logging)
             restRequestInterceptor?.let { rri ->
@@ -60,18 +60,18 @@ object TCApiClient {
         }.build()
     }
 
-    val apiService = getClient(getBaseUrl()).create(TCApiService::class.java)
+    val apiService = getClient(getBaseUrl()).create(StoryApiService::class.java)
 
     fun addHeader(name: String, value: String) {
         restRequestInterceptor?.addHeader(name, value)
     }
 
     fun addAuthorization(token: String) {
-        addHeader(TCApiConfiguration.AUTHORIZATION_HEADER, token)
+        addHeader(StoryApiConfiguration.AUTHORIZATION_HEADER, token)
     }
 
     fun removeAuthorization() {
-        removeHeader(TCApiConfiguration.AUTHORIZATION_HEADER)
+        removeHeader(StoryApiConfiguration.AUTHORIZATION_HEADER)
     }
 
     fun removeHeader(name: String) {

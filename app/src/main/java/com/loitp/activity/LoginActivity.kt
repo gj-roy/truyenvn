@@ -11,7 +11,7 @@ import com.core.utilities.LActivityUtil
 import com.core.utilities.LValidateUtil
 import com.loitp.BuildConfig
 import com.loitp.R
-import com.loitp.service.TCApiClient
+import com.loitp.service.StoryApiClient
 import com.loitp.viewmodels.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -67,7 +67,7 @@ class LoginActivity : BaseFontActivity() {
                         } else {
 
                             //add token
-                            TCApiClient.addAuthorization(token)
+                            StoryApiClient.addAuthorization(token)
 
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)

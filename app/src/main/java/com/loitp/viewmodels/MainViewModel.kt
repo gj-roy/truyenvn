@@ -1,28 +1,44 @@
 package com.loitp.viewmodels
 
-import android.content.Context
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import com.core.base.BaseViewModel
-import com.core.utilities.LStoreUtil
-import com.service.model.UserTest
+import com.loitp.model.Story
+import com.loitp.service.StoryApiClient
+import com.loitp.service.StoryRepository
+import com.loitp.service.StoryViewModel
+import com.service.livedata.ActionData
+import com.service.livedata.ActionLiveData
 import kotlinx.coroutines.launch
 
-class MainViewModel : BaseViewModel() {
+class MainViewModel : StoryViewModel() {
     private val logTag = "loitpp" + javaClass.simpleName
+    private val repository = StoryRepository(StoryApiClient.apiService)
 
-//    val listChapLiveData: MutableLiveData<List<String>> = MutableLiveData()
+    val listStoryLiveData: ActionLiveData<ActionData<List<Story>>> = ActionLiveData()
 
-//    fun loadListChap(context: Context) {
-//        ioScope.launch {
-//            showLoading(true)
-//
-//            val string = LStoreUtil.readTxtFromAsset(assetFile = "db.sqlite")
-//            Log.d(logTag, "loadListChap string $string")
-//            val listChap = string.split("#")
-//            listChapLiveData.postValue(listChap)
-//
-//            showLoading(false)
-//        }
-//    }
+    fun getListStory(pageSize: Int, pageIndex: Int) {
+        listStoryLiveData.set(ActionData(isDoing = true))
+        ioScope.launch {
+            val response = repository.getListStory(
+                pageSize = pageSize,
+                pageIndex = pageIndex
+            )
+            if (response.items == null || response.isSuccess == false) {
+                listStoryLiveData.postAction(
+                    getErrorRequestStory(response)
+                )
+            } else {
+                val data = response.items
+                listStoryLiveData.post(
+                    ActionData(
+                        isDoing = false,
+                        isSuccess = true,
+                        data = data,
+                        total = response.total,
+                        totalPages = response.totalPages,
+                        page = response.page
+                    )
+                )
+            }
+
+        }
+    }
 }

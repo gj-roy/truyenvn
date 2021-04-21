@@ -8,7 +8,7 @@ import com.loitp.BuildConfig
  * Ho Chi Minh City, VN
  * www.muathu@gmail.com
  */
-class TCApiConfiguration {
+class StoryApiConfiguration {
     companion object {
         // authentication
         const val BASE_URL = BuildConfig.BASE_URL

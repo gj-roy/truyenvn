@@ -12,20 +12,20 @@ import retrofit2.Response
  * Ho Chi Minh City, VN
  * www.muathu@gmail.com
  */
-open class TCBaseRepository {
+open class StoryBaseRepository {
 
-    suspend fun <T : Any> makeApiCall(call: suspend () -> Response<TCApiResponse<T>>): TCApiResponse<T> {
+    suspend fun <T : Any> makeApiCall(call: suspend () -> Response<StoryApiResponse<T>>): StoryApiResponse<T> {
 
         return try {
             val response = call.invoke()
 
             if (response.isSuccessful) {
                 response.body() ?: run {
-                    TCApiResponse<T>(status = true, items = null)
+                    StoryApiResponse<T>(status = true, items = null)
                 }
             } else {
                 if (response.code() == RequestStatus.NO_AUTHENTICATION.value) {
-                    TCApiResponse<T>(
+                    StoryApiResponse<T>(
                         status = false,
                         errorCode = RequestStatus.NO_AUTHENTICATION.value,
                         errors = ErrorResponse(message = "error_login"),
@@ -38,7 +38,7 @@ open class TCBaseRepository {
 
         } catch (ex: Exception) {
             val error = ex.message
-            TCApiResponse(
+            StoryApiResponse(
                 status = false,
                 errorCode = null,
                 errors = ErrorResponse(error),
@@ -47,7 +47,7 @@ open class TCBaseRepository {
         }
     }
 
-    private fun <T : Any> handleError(response: Response<TCApiResponse<T>>?): TCApiResponse<T> {
+    private fun <T : Any> handleError(response: Response<StoryApiResponse<T>>?): StoryApiResponse<T> {
         var errorResponse: ErrorResponse? = null
         response?.errorBody()?.let {
             try {
@@ -64,19 +64,19 @@ open class TCBaseRepository {
 
         if (errorResponse == null) {
             when {
-                response?.code() == RequestStatus.BAD_GATEWAY.value -> return TCApiResponse(
+                response?.code() == RequestStatus.BAD_GATEWAY.value -> return StoryApiResponse(
                     status = false,
                     errors = ErrorResponse(message = "error_bad_gateway"),
                     items = null,
                     errorCode = response.code()
                 )
-                response?.code() == RequestStatus.INTERNAL_SERVER.value -> return TCApiResponse(
+                response?.code() == RequestStatus.INTERNAL_SERVER.value -> return StoryApiResponse(
                     status = false,
                     errors = ErrorResponse(message = "error_internal_server"),
                     items = null,
                     errorCode = response.code()
                 )
-                else -> return TCApiResponse(
+                else -> return StoryApiResponse(
                     status = false,
                     errors = ErrorResponse(message = "error_internal_server"),
                     items = null
@@ -84,7 +84,7 @@ open class TCBaseRepository {
             }
         }
 
-        return TCApiResponse(
+        return StoryApiResponse(
             status = false,
             errors = ErrorResponse(message = errorResponse?.message),
             items = null,

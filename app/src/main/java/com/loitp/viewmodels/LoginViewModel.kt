@@ -1,9 +1,9 @@
 package com.loitp.viewmodels
 
 import com.annotation.LogTag
-import com.loitp.service.TCApiClient
-import com.loitp.service.TCRepository
-import com.loitp.service.TCViewModel
+import com.loitp.service.StoryApiClient
+import com.loitp.service.StoryRepository
+import com.loitp.service.StoryViewModel
 import com.loitp.model.Login
 import com.service.livedata.ActionData
 import com.service.livedata.ActionLiveData
@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
  */
 
 @LogTag("LoginViewModel")
-class LoginViewModel : TCViewModel() {
-    private val repository = TCRepository(TCApiClient.apiService)
+class LoginViewModel : StoryViewModel() {
+    private val repository = StoryRepository(StoryApiClient.apiService)
 
     val loginActionLiveData: ActionLiveData<ActionData<Login>> = ActionLiveData()
 
@@ -33,7 +33,7 @@ class LoginViewModel : TCViewModel() {
 //            logD("<<<login " + BaseApplication.gson.toJson(response))
             if (response.items == null || response.isSuccess == false) {
                 loginActionLiveData.postAction(
-                    getErrorRequestTC(response)
+                    getErrorRequestStory(response)
                 )
             } else {
                 val data = response.items

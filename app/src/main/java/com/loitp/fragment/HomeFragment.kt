@@ -68,7 +68,7 @@ class HomeFragment : BaseFragment() {
 
                     if (isSuccess == true) {
                         val listStory = actionData.data
-
+                        //TODO
                     } else {
                         val error = actionData.errorResponse
                         showDialogError(error?.message ?: getString(R.string.err_unknow), Runnable {

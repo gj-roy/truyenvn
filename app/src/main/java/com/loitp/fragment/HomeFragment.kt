@@ -1,5 +1,6 @@
 package com.loitp.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -9,15 +10,20 @@ import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFragment
 import com.core.common.Constants
+import com.core.utilities.LActivityUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
+import com.loitp.activity.MainActivity
 import com.loitp.adapter.BannerAdapter
 import com.loitp.adapter.LoadingAdapter
 import com.loitp.adapter.NewsAdapter
 import com.loitp.model.News
+import com.loitp.service.StoryApiClient
 import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.MainViewModel
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.frm_home.*
+import kotlinx.android.synthetic.main.frm_home.indicatorView
 
 //TODO refresh layout
 @LogTag("HomeFragment")
@@ -49,16 +55,27 @@ class HomeFragment : BaseFragment() {
     private fun setupViewModels() {
         mainViewModel = getViewModel(MainViewModel::class.java)
         mainViewModel?.let { mvm ->
-            mvm.eventLoading.observe(viewLifecycleOwner, Observer { isLoading ->
-                if (isLoading) {
+            mvm.listStoryLiveData.observe(viewLifecycleOwner, Observer { actionData ->
+                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
+                genNewsData()
+
+                val isDoing = actionData.isDoing
+                val isSuccess = actionData.isSuccess
+                if (isDoing == true) {
                     indicatorView.smoothToShow()
                 } else {
                     indicatorView.smoothToHide()
-                }
-            })
 
-            mvm.listStoryLiveData.observe(viewLifecycleOwner, Observer { listStory ->
-                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(listStory))
+                    if (isSuccess == true) {
+                        val listStory = actionData.data
+
+                    } else {
+                        val error = actionData.errorResponse
+                        showDialogError(error?.message ?: getString(R.string.err_unknow), Runnable {
+                            //do nothing
+                        })
+                    }
+                }
             })
         }
 
@@ -95,8 +112,6 @@ class HomeFragment : BaseFragment() {
                 //TODO
             }
         )
-
-        genNewsData()
     }
 
     private fun isLoading(): Boolean {

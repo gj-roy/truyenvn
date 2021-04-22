@@ -61,7 +61,8 @@ class LoginActivity : BaseFontActivity() {
                         val token = data?.jwtToken
 //                    logD("token $token")
                         if (token.isNullOrEmpty()) {
-                            showDialogError(getString(R.string.err_unknow), Runnable {
+                            showDialogError(
+                                getString(R.string.err_unknow), Runnable {
                                 onBackPressed()
                             });
                         } else {

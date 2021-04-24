@@ -105,6 +105,12 @@ class HomeFragment : BaseFragment() {
             }
         }
 
+        storyAdapter?.let { na ->
+            na.onClickRootListener = { _, position ->
+                showShortInformation("Click position $position")
+            }
+        }
+
         bannerAdapter?.let {
             concatAdapter.addAdapter(it)
         }

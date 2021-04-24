@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.annotation.LogTag
 import com.core.adapter.BaseAdapter
 import com.core.utilities.LImageUtil
+import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.model.Story
 import com.views.setSafeOnClickListener
@@ -16,6 +17,8 @@ import kotlinx.android.synthetic.main.view_row_item_story.view.*
 class StoryAdapter(
     private val listBannerStory: ArrayList<Story>
 ) : BaseAdapter() {
+
+    var onClickRootListener: ((Story, Int) -> Unit)? = null
 
     fun addData(listBannerStory: List<Story>) {
         this.listBannerStory.addAll(listBannerStory)
@@ -32,9 +35,12 @@ class StoryAdapter(
             )
             itemView.tvTitle.text = story.title
 
-            itemView.layoutRoot.setSafeOnClickListener {
-                //TODO
-            }
+            LUIUtil.setSafeOnClickListenerElastic(
+                view = itemView.layoutRoot,
+                runnable = Runnable {
+                    onClickRootListener?.invoke(story, bindingAdapterPosition)
+                }
+            )
         }
     }
 

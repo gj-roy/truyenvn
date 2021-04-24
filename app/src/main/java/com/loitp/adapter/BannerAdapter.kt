@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.annotation.LogTag
 import com.core.adapter.BaseAdapter
 import com.core.utilities.LImageUtil
+import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.model.Story
 import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.view_row_item_banner.view.*
+import kotlinx.android.synthetic.main.view_row_item_banner.view.layoutRoot
+import kotlinx.android.synthetic.main.view_row_item_story.view.*
 
 @LogTag("BannerAdapter")
 class BannerAdapter(
@@ -33,9 +36,12 @@ class BannerAdapter(
                 any = story.getImgSource(),
                 imageView = itemView.imageView
             )
-            itemView.layoutRoot.setSafeOnClickListener {
-                onClickRootListener?.invoke(story, bindingAdapterPosition)
-            }
+            LUIUtil.setSafeOnClickListenerElastic(
+                view = itemView.layoutRoot,
+                runnable = Runnable {
+                    onClickRootListener?.invoke(story, bindingAdapterPosition)
+                }
+            )
         }
     }
 

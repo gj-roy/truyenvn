@@ -5,7 +5,6 @@
     android:id="@+id/layoutRoot"
     android:layout_width="match_parent"
     android:layout_height="@dimen/w_100"
-    android:foreground="?selectableItemBackground"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingStart="@dimen/padding_medium"

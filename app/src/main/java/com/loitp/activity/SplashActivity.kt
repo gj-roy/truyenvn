@@ -88,7 +88,7 @@ class SplashActivity : BaseFontActivity() {
 
     private fun goToHome() {
         if (isAnimDone && isCheckReadyDone) {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             LActivityUtil.tranIn(this)
             this.finishAfterTransition()
@@ -189,7 +189,7 @@ class SplashActivity : BaseFontActivity() {
                 }
 
 //              val isReady = isReady()
-                //TODO loitpp
+                //TODO hard code isReady
                 val isReady = true // return true for demo
                 if (isReady) {
                     LPrefUtil.setCheckAppReady(value = true)

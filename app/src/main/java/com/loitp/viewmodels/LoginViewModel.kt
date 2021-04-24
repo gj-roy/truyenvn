@@ -1,33 +1,43 @@
 package com.loitp.viewmodels
 
-import com.loitp.model.Story
+import com.annotation.LogTag
 import com.loitp.service.StoryApiClient
 import com.loitp.service.StoryRepository
 import com.loitp.service.StoryViewModel
+import com.loitp.model.Login
 import com.service.livedata.ActionData
 import com.service.livedata.ActionLiveData
 import kotlinx.coroutines.launch
 
-class MainViewModel : StoryViewModel() {
-    private val logTag = "loitpp" + javaClass.simpleName
+/**
+ * Created by Loitp on 24,December,2019
+ * HMS Ltd
+ * Ho Chi Minh City, VN
+ * www.muathu@gmail.com
+ */
+
+@LogTag("LoginViewModel")
+class LoginViewModel : StoryViewModel() {
     private val repository = StoryRepository(StoryApiClient.apiService)
 
-    val listStoryLiveData: ActionLiveData<ActionData<List<Story>>> = ActionLiveData()
+    val loginActionLiveData: ActionLiveData<ActionData<Login>> = ActionLiveData()
 
-    fun getListStory(pageSize: Int, pageIndex: Int) {
-        listStoryLiveData.set(ActionData(isDoing = true))
+    fun login(email: String, password: String) {
+        loginActionLiveData.set(ActionData(isDoing = true))
+
         ioScope.launch {
-            val response = repository.getListStory(
-                pageSize = pageSize,
-                pageIndex = pageIndex
+            val response = repository.login(
+                email = email,
+                password = password
             )
+//            logD("<<<login " + BaseApplication.gson.toJson(response))
             if (response.items == null || response.isSuccess == false) {
-                listStoryLiveData.postAction(
+                loginActionLiveData.postAction(
                     getErrorRequestStory(response)
                 )
             } else {
                 val data = response.items
-                listStoryLiveData.post(
+                loginActionLiveData.post(
                     ActionData(
                         isDoing = false,
                         isSuccess = true,
@@ -38,7 +48,8 @@ class MainViewModel : StoryViewModel() {
                     )
                 )
             }
-
         }
+
     }
+
 }

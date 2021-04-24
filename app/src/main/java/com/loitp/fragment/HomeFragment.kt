@@ -1,20 +1,38 @@
 package com.loitp.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFragment
-import com.core.utilities.LSocialUtil
+import com.core.common.Constants
+import com.core.utilities.LActivityUtil
+import com.core.utilities.LUIUtil
 import com.loitp.R
+import com.loitp.activity.MainActivity
+import com.loitp.adapter.BannerAdapter
+import com.loitp.adapter.LoadingAdapter
+import com.loitp.adapter.NewsAdapter
+import com.loitp.model.News
+import com.loitp.service.StoryApiClient
+import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.MainViewModel
-import com.views.setSafeOnClickListener
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.frm_home.*
+import kotlinx.android.synthetic.main.frm_home.indicatorView
 
+//TODO refresh layout
 @LogTag("HomeFragment")
 class HomeFragment : BaseFragment() {
 
+    private var concatAdapter = ConcatAdapter()
+    private var bannerAdapter: BannerAdapter? = null
+    private var newsAdapter: NewsAdapter? = null
+    private val loadingAdapter = LoadingAdapter()
     private var mainViewModel: MainViewModel? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,9 +40,8 @@ class HomeFragment : BaseFragment() {
 
         setupViews()
         setupViewModels()
-        context?.let {
-            mainViewModel?.loadListChap(context = it)
-        }
+
+        mainViewModel?.getListStory(StoryApiConfiguration.PAGE_SIZE, 0)
     }
 
     override fun setLayoutResourceId(): Int {
@@ -32,27 +49,98 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setupViews() {
-        btGithub.setSafeOnClickListener {
-            LSocialUtil.openUrlInBrowser(context = activity, url = "https://github.com/tplloi/basemaster.demo")
-        }
+        setupDataInRecyclerView()
     }
 
     private fun setupViewModels() {
         mainViewModel = getViewModel(MainViewModel::class.java)
         mainViewModel?.let { mvm ->
-            mvm.eventLoading.observe(viewLifecycleOwner, Observer { isLoading ->
-                if (isLoading) {
+            mvm.listStoryLiveData.observe(viewLifecycleOwner, Observer { actionData ->
+                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
+                genNewsData()
+
+                val isDoing = actionData.isDoing
+                val isSuccess = actionData.isSuccess
+                if (isDoing == true) {
                     indicatorView.smoothToShow()
                 } else {
                     indicatorView.smoothToHide()
-                }
-            })
 
-            mvm.listChapLiveData.observe(viewLifecycleOwner, Observer { listChap ->
-                logD("<<<listChapLiveData " + BaseApplication.gson.toJson(listChap))
-                btGithub.visibility = View.VISIBLE
+                    if (isSuccess == true) {
+                        val listStory = actionData.data
+                        //TODO
+                    } else {
+                        val error = actionData.errorResponse
+                        showDialogError(error?.message ?: getString(R.string.err_unknow), Runnable {
+                            //do nothing
+                        })
+                    }
+                }
             })
         }
 
+    }
+
+    private fun setupDataInRecyclerView() {
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        bannerAdapter = BannerAdapter(ArrayList())
+        newsAdapter = NewsAdapter(ArrayList())
+
+        newsAdapter?.let { na ->
+            na.onClickRootListener = { _, position ->
+                showShortInformation("Click position $position")
+            }
+        }
+
+        bannerAdapter?.let {
+            concatAdapter.addAdapter(it)
+        }
+        newsAdapter?.let {
+            concatAdapter.addAdapter(it)
+        }
+
+        recyclerView.adapter = concatAdapter
+
+        LUIUtil.setScrollChange(
+            recyclerView = recyclerView,
+            onTop = {
+                logD("onTop")
+            },
+            onBottom = {
+                logD("onBottom")
+                //TODO
+            }
+        )
+    }
+
+    private fun isLoading(): Boolean {
+        concatAdapter.adapters.forEach { childAdapter ->
+            if (childAdapter == loadingAdapter) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun genNewsData() {
+        if (!isLoading()) {
+            concatAdapter.addAdapter(loadingAdapter)
+            concatAdapter.itemCount.let {
+                recyclerView.scrollToPosition(it - 1)
+            }
+
+            val listNews = ArrayList<News>()
+            for (i in 0..10) {
+                val news = News(
+                    id = System.currentTimeMillis(),
+                    title = "Title " + System.currentTimeMillis(),
+                    image = Constants.URL_IMG_10
+                )
+                listNews.add(news)
+            }
+            concatAdapter.removeAdapter(loadingAdapter)
+            newsAdapter?.addData(listNews)
+        }
     }
 }

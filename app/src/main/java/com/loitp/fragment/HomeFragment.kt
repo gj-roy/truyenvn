@@ -10,7 +10,7 @@ import com.core.base.BaseFragment
 import com.core.common.Constants
 import com.core.utilities.LUIUtil
 import com.loitp.R
-import com.loitp.adapter.BannerChildAdapter
+import com.loitp.adapter.StoryAdapter
 import com.loitp.adapter.LoadingAdapter
 import com.loitp.adapter.NewsAdapter
 import com.loitp.model.News
@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.frm_home.indicatorView
 class HomeFragment : BaseFragment() {
 
     private var concatAdapter = ConcatAdapter()
-    private var bannerChildAdapter: BannerChildAdapter? = null
+    private var storyAdapter: StoryAdapter? = null
     private var newsAdapter: NewsAdapter? = null
     private val loadingAdapter = LoadingAdapter()
     private var mainViewModel: MainViewModel? = null
@@ -71,7 +71,7 @@ class HomeFragment : BaseFragment() {
                                 if (listStory.size > 5) {
                                     listBannerStory.addAll(listStory)
                                     listBannerStory.shuffle()
-                                    bannerChildAdapter?.setData(listBannerStory.subList(0, 5))
+                                    storyAdapter?.setData(listBannerStory.subList(0, 5))
                                 }
                             }
                         }
@@ -90,7 +90,7 @@ class HomeFragment : BaseFragment() {
     private fun setupDataInRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        bannerChildAdapter = BannerChildAdapter(ArrayList())
+        storyAdapter = StoryAdapter(ArrayList())
         newsAdapter = NewsAdapter(ArrayList())
 
         newsAdapter?.let { na ->
@@ -99,7 +99,7 @@ class HomeFragment : BaseFragment() {
             }
         }
 
-        bannerChildAdapter?.let {
+        storyAdapter?.let {
             concatAdapter.addAdapter(it)
         }
         newsAdapter?.let {

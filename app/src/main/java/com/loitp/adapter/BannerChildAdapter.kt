@@ -7,13 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.annotation.LogTag
 import com.core.adapter.BaseAdapter
 import com.core.utilities.LImageUtil
+import com.core.utilities.LLog
 import com.loitp.R
+import com.loitp.cons.Cons
 import com.loitp.model.Story
 import com.views.setSafeOnClickListener
-import kotlinx.android.synthetic.main.view_row_item_banner.view.*
+import kotlinx.android.synthetic.main.view_row_item_banner_child.view.*
 
-@LogTag("BannerAdapter")
-class BannerAdapter(
+@LogTag("BannerChildAdapter")
+class BannerChildAdapter(
     private val listBannerStory: ArrayList<Story>
 ) : BaseAdapter() {
 
@@ -27,7 +29,7 @@ class BannerAdapter(
         fun bind(story: Story) {
             LImageUtil.load(
                 context = itemView.imageViewBanner.context,
-                any = story.imageSrc,
+                any = story.getImgSource(),
                 imageView = itemView.imageViewBanner,
                 resError = R.drawable.place_holder_error404
             )
@@ -42,7 +44,7 @@ class BannerAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         DataViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.view_row_item_banner,
+                R.layout.view_row_item_banner_child,
                 parent,
                 false
             )

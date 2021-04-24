@@ -1,28 +1,22 @@
 package com.loitp.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.annotation.LogTag
-import com.core.base.BaseApplication
 import com.core.base.BaseFragment
 import com.core.common.Constants
-import com.core.utilities.LActivityUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
-import com.loitp.activity.MainActivity
-import com.loitp.adapter.BannerAdapter
+import com.loitp.adapter.BannerChildAdapter
 import com.loitp.adapter.LoadingAdapter
 import com.loitp.adapter.NewsAdapter
 import com.loitp.model.News
 import com.loitp.model.Story
-import com.loitp.service.StoryApiClient
 import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.MainViewModel
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.frm_home.*
 import kotlinx.android.synthetic.main.frm_home.indicatorView
 
@@ -31,7 +25,7 @@ import kotlinx.android.synthetic.main.frm_home.indicatorView
 class HomeFragment : BaseFragment() {
 
     private var concatAdapter = ConcatAdapter()
-    private var bannerAdapter: BannerAdapter? = null
+    private var bannerChildAdapter: BannerChildAdapter? = null
     private var newsAdapter: NewsAdapter? = null
     private val loadingAdapter = LoadingAdapter()
     private var mainViewModel: MainViewModel? = null
@@ -77,7 +71,7 @@ class HomeFragment : BaseFragment() {
                                 if (listStory.size > 5) {
                                     listBannerStory.addAll(listStory)
                                     listBannerStory.shuffle()
-                                    bannerAdapter?.setData(listBannerStory.subList(0, 5))
+                                    bannerChildAdapter?.setData(listBannerStory.subList(0, 5))
                                 }
                             }
                         }
@@ -96,7 +90,7 @@ class HomeFragment : BaseFragment() {
     private fun setupDataInRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        bannerAdapter = BannerAdapter(ArrayList())
+        bannerChildAdapter = BannerChildAdapter(ArrayList())
         newsAdapter = NewsAdapter(ArrayList())
 
         newsAdapter?.let { na ->
@@ -105,7 +99,7 @@ class HomeFragment : BaseFragment() {
             }
         }
 
-        bannerAdapter?.let {
+        bannerChildAdapter?.let {
             concatAdapter.addAdapter(it)
         }
         newsAdapter?.let {

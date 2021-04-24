@@ -17,10 +17,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="?attr/themeBackgroundColorMedium"
+        android:background="@color/black50"
         android:gravity="center"
+        android:paddingStart="@dimen/padding_medium"
+        android:paddingTop="@dimen/padding_small"
+        android:paddingEnd="@dimen/padding_medium"
+        android:paddingBottom="@dimen/padding_small"
+        android:singleLine="true"
         android:text="@string/no_data"
-        android:textColor="?attr/themeTextColor"
+        android:textColor="@color/white"
         android:textSize="@dimen/txt_medium" />
 
 </RelativeLayout>

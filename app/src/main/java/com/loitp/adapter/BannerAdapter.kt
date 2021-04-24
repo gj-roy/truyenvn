@@ -10,11 +10,9 @@ import com.core.utilities.LImageUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.model.Story
-import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.view_row_item_banner.view.*
-import kotlinx.android.synthetic.main.view_row_item_banner.view.layoutRoot
-import kotlinx.android.synthetic.main.view_row_item_story.view.*
 
+//TODO
 @LogTag("BannerAdapter")
 class BannerAdapter(
     private val listStoryBanner: ArrayList<Story>

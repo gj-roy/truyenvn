@@ -1,31 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutRoot"
     android:layout_width="match_parent"
     android:layout_height="@dimen/w_200"
-    android:background="?attr/themeBackgroundColorMedium">
+    android:layout_marginStart="@dimen/margin_medium"
+    android:layout_marginTop="@dimen/margin_small"
+    android:layout_marginEnd="@dimen/margin_medium"
+    android:layout_marginBottom="@dimen/margin_small"
+    app:cardBackgroundColor="?attr/themeBackgroundColor"
+    app:cardCornerRadius="@dimen/round_medium"
+    app:cardElevation="@dimen/w_1">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageViewBanner"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop" />
+        android:orientation="horizontal">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/black50"
-        android:gravity="center"
-        android:paddingStart="@dimen/padding_medium"
-        android:paddingTop="@dimen/padding_small"
-        android:paddingEnd="@dimen/padding_medium"
-        android:paddingBottom="@dimen/padding_small"
-        android:singleLine="true"
-        android:text="@string/no_data"
-        android:textColor="@color/white"
-        android:textSize="@dimen/txt_medium" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewBanner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/logo" />
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_medium">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/no_data"
+                android:textColor="?attr/themeTextColor"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

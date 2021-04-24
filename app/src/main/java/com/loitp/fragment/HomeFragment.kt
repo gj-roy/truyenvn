@@ -12,8 +12,7 @@ import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.adapter.StoryAdapter
 import com.loitp.adapter.LoadingAdapter
-import com.loitp.adapter.NewsAdapter
-import com.loitp.model.News
+import com.loitp.adapter.BannerAdapter
 import com.loitp.model.Story
 import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.MainViewModel
@@ -26,7 +25,7 @@ class HomeFragment : BaseFragment() {
 
     private var concatAdapter = ConcatAdapter()
     private var storyAdapter: StoryAdapter? = null
-    private var newsAdapter: NewsAdapter? = null
+    private var bannerAdapter: BannerAdapter? = null
     private val loadingAdapter = LoadingAdapter()
     private var mainViewModel: MainViewModel? = null
 
@@ -63,17 +62,24 @@ class HomeFragment : BaseFragment() {
 
                         val listStory = actionData.data
                         if (listStory.isNullOrEmpty()) {
-                            tvNoData.visibility = View.VISIBLE
+                            if (storyAdapter?.itemCount == 0) {
+                                tvNoData.visibility = View.VISIBLE
+                            }
                         } else {
                             tvNoData.visibility = View.GONE
+
+                            //banner
                             val listBannerStory = ArrayList<Story>()
                             if (listStory is ArrayList) {
                                 if (listStory.size > 5) {
                                     listBannerStory.addAll(listStory)
                                     listBannerStory.shuffle()
-                                    storyAdapter?.setData(listBannerStory.subList(0, 5))
+                                    bannerAdapter?.setData(listBannerStory.subList(0, 5))
                                 }
                             }
+
+                            //list item
+                            storyAdapter?.addData(listStory)
                         }
                     } else {
                         val error = actionData.errorResponse
@@ -91,18 +97,18 @@ class HomeFragment : BaseFragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         storyAdapter = StoryAdapter(ArrayList())
-        newsAdapter = NewsAdapter(ArrayList())
+        bannerAdapter = BannerAdapter(ArrayList())
 
-        newsAdapter?.let { na ->
+        bannerAdapter?.let { na ->
             na.onClickRootListener = { _, position ->
                 showShortInformation("Click position $position")
             }
         }
 
-        storyAdapter?.let {
+        bannerAdapter?.let {
             concatAdapter.addAdapter(it)
         }
-        newsAdapter?.let {
+        storyAdapter?.let {
             concatAdapter.addAdapter(it)
         }
 
@@ -129,24 +135,14 @@ class HomeFragment : BaseFragment() {
         return false
     }
 
-    private fun genNewsData() {
-        if (!isLoading()) {
-            concatAdapter.addAdapter(loadingAdapter)
-            concatAdapter.itemCount.let {
-                recyclerView.scrollToPosition(it - 1)
-            }
-
-            val listNews = ArrayList<News>()
-            for (i in 0..10) {
-                val news = News(
-                    id = System.currentTimeMillis(),
-                    title = "Title " + System.currentTimeMillis(),
-                    image = Constants.URL_IMG_10
-                )
-                listNews.add(news)
-            }
-            concatAdapter.removeAdapter(loadingAdapter)
-            newsAdapter?.addData(listNews)
-        }
-    }
+//    private fun genNewsData() {
+//        if (!isLoading()) {
+//            concatAdapter.addAdapter(loadingAdapter)
+//            concatAdapter.itemCount.let {
+//                recyclerView.scrollToPosition(it - 1)
+//            }
+//            concatAdapter.removeAdapter(loadingAdapter)
+//            bannerAdapter?.addData(listNews)
+//        }
+//    }
 }

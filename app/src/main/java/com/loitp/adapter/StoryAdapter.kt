@@ -17,8 +17,7 @@ class StoryAdapter(
     private val listBannerStory: ArrayList<Story>
 ) : BaseAdapter() {
 
-    fun setData(listBannerStory: List<Story>) {
-        this.listBannerStory.clear()
+    fun addData(listBannerStory: List<Story>) {
         this.listBannerStory.addAll(listBannerStory)
         notifyDataSetChanged()
     }

@@ -1,5 +1,6 @@
 package com.loitp.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ class StoryAdapter(
     }
 
     inner class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        @SuppressLint("SetTextI18n")
         fun bind(story: Story) {
             LImageUtil.load(
                 context = itemView.imageViewBanner.context,
@@ -35,6 +37,8 @@ class StoryAdapter(
             )
             itemView.tvTitle.text = story.title
             LUIUtil.setTextFromHTML(textView = itemView.tvDescription, bodyData = story.description)
+            itemView.tvTotalChapter.text = "Số chap: ${story.totalChapter}"
+            itemView.tvViewCount.text = "Số lượt xem: ${story.viewCount}"
 
             LUIUtil.setSafeOnClickListenerElastic(
                 view = itemView.layoutRoot,

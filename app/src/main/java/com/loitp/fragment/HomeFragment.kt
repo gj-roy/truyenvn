@@ -18,6 +18,7 @@ import com.loitp.adapter.BannerAdapter
 import com.loitp.adapter.LoadingAdapter
 import com.loitp.adapter.NewsAdapter
 import com.loitp.model.News
+import com.loitp.model.Story
 import com.loitp.service.StoryApiClient
 import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.MainViewModel
@@ -56,9 +57,7 @@ class HomeFragment : BaseFragment() {
         mainViewModel = getViewModel(MainViewModel::class.java)
         mainViewModel?.let { mvm ->
             mvm.listStoryLiveData.observe(viewLifecycleOwner, Observer { actionData ->
-                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
-                genNewsData()
-
+//                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
                 val isDoing = actionData.isDoing
                 val isSuccess = actionData.isSuccess
                 if (isDoing == true) {
@@ -67,8 +66,21 @@ class HomeFragment : BaseFragment() {
                     indicatorView.smoothToHide()
 
                     if (isSuccess == true) {
+
                         val listStory = actionData.data
-                        //TODO
+                        if (listStory.isNullOrEmpty()) {
+                            tvNoData.visibility = View.VISIBLE
+                        } else {
+                            tvNoData.visibility = View.GONE
+                            val listBannerStory = ArrayList<Story>()
+                            if (listStory is ArrayList) {
+                                if (listStory.size > 5) {
+                                    listBannerStory.addAll(listStory)
+                                    listBannerStory.shuffle()
+                                    bannerAdapter?.setData(listBannerStory.subList(0, 5))
+                                }
+                            }
+                        }
                     } else {
                         val error = actionData.errorResponse
                         showDialogError(error?.message ?: getString(R.string.err_unknow), Runnable {

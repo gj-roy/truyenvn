@@ -6,6 +6,7 @@ import com.loitp.service.StoryRepository
 import com.loitp.service.StoryViewModel
 import com.service.livedata.ActionData
 import com.service.livedata.ActionLiveData
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainViewModel : StoryViewModel() {
@@ -21,6 +22,7 @@ class MainViewModel : StoryViewModel() {
                 pageSize = pageSize,
                 pageIndex = pageIndex
             )
+            delay(2000)
             if (response.items == null || response.isSuccess == false) {
                 listStoryLiveData.postAction(
                     getErrorRequestStory(response)

@@ -28,6 +28,8 @@ class HomeFragment : BaseFragment() {
     private var bannerAdapter: BannerAdapter? = null
     private val loadingAdapter = LoadingAdapter()
     private var mainViewModel: MainViewModel? = null
+    private var pageIndex = 0
+    private var totalPage = Int.MAX_VALUE
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,7 +37,7 @@ class HomeFragment : BaseFragment() {
         setupViews()
         setupViewModels()
 
-        mainViewModel?.getListStory(StoryApiConfiguration.PAGE_SIZE, 0)
+        mainViewModel?.getListStory(StoryApiConfiguration.PAGE_SIZE, pageIndex)
     }
 
     override fun setLayoutResourceId(): Int {
@@ -53,13 +55,21 @@ class HomeFragment : BaseFragment() {
 //                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
                 val isDoing = actionData.isDoing
                 val isSuccess = actionData.isSuccess
+                actionData.totalPages?.let {
+                    totalPage = it
+                }
+
                 if (isDoing == true) {
-                    indicatorView.smoothToShow()
+                    if (actionData?.page == 0) {
+                        indicatorView.smoothToShow()
+                    }
                 } else {
-                    indicatorView.smoothToHide()
+                    if (actionData?.page == 0) {
+                        indicatorView.smoothToHide()
+                    }
 
                     if (isSuccess == true) {
-
+                        concatAdapter.removeAdapter(loadingAdapter)
                         val listStory = actionData.data
                         if (listStory.isNullOrEmpty()) {
                             if (storyAdapter?.itemCount == 0) {
@@ -127,7 +137,7 @@ class HomeFragment : BaseFragment() {
             },
             onBottom = {
                 logD("onBottom")
-                //TODO
+                loadMore()
             }
         )
     }
@@ -141,14 +151,18 @@ class HomeFragment : BaseFragment() {
         return false
     }
 
-//    private fun genNewsData() {
-//        if (!isLoading()) {
-//            concatAdapter.addAdapter(loadingAdapter)
-//            concatAdapter.itemCount.let {
-//                recyclerView.scrollToPosition(it - 1)
-//            }
-//            concatAdapter.removeAdapter(loadingAdapter)
-//            bannerAdapter?.addData(listNews)
-//        }
-//    }
+    private fun loadMore() {
+//        logE("loadMore pageIndex $pageIndex, totalPage $totalPage, isLoading() ${isLoading()}")
+        if (pageIndex >= totalPage) {
+            return;
+        }
+        if (!isLoading()) {
+            concatAdapter.addAdapter(loadingAdapter)
+            concatAdapter.itemCount.let {
+                recyclerView.scrollToPosition(it - 1)
+            }
+            pageIndex++
+            mainViewModel?.getListStory(StoryApiConfiguration.PAGE_SIZE, pageIndex)
+        }
+    }
 }

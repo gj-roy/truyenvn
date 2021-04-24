@@ -9,6 +9,7 @@ import com.core.adapter.BaseAdapter
 import com.core.utilities.LImageUtil
 import com.loitp.R
 import com.loitp.model.Story
+import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.view_row_item_banner.view.*
 
 @LogTag("BannerAdapter")
@@ -27,9 +28,14 @@ class BannerAdapter(
             LImageUtil.load(
                 context = itemView.imageViewBanner.context,
                 any = story.imageSrc,
-                imageView = itemView.imageViewBanner
+                imageView = itemView.imageViewBanner,
+                resError = R.drawable.place_holder_error404
             )
             itemView.tvTitle.text = story.title
+
+            itemView.layoutRoot.setSafeOnClickListener {
+                //TODO
+            }
         }
     }
 

@@ -34,6 +34,7 @@ class StoryAdapter(
                 resError = R.drawable.place_holder_error404
             )
             itemView.tvTitle.text = story.title
+            LUIUtil.setTextFromHTML(textView = itemView.tvDescription, bodyData = story.description)
 
             LUIUtil.setSafeOnClickListenerElastic(
                 view = itemView.layoutRoot,

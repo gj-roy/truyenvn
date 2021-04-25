@@ -22,7 +22,7 @@
             android:id="@+id/imageViewBanner"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:contentDescription="@string/app_name"
             android:scaleType="centerCrop"
             tools:src="@drawable/logo" />
@@ -30,7 +30,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/padding_small">

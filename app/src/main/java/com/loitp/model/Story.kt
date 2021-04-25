@@ -1,8 +1,9 @@
 package com.loitp.model
 
 import androidx.annotation.Keep
+import com.core.utilities.LAppResource
 import com.google.gson.annotations.SerializedName
-import com.loitp.cons.Cons
+import com.loitp.R
 import java.io.Serializable
 
 @Keep
@@ -32,6 +33,6 @@ data class Story(
     var modifiedDate: String = ""
 ) : Serializable {
     fun getImgSource(): String {
-        return this.imageSrc ?: Cons.IMG_DEFAULT
+        return this.imageSrc ?: LAppResource.getString(R.string.link_cover)
     }
 }

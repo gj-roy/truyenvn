@@ -1,5 +1,6 @@
 package com.loitp.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,12 @@ class BannerAdapter(
     private inner class SamplePagerAdapter(fm: FragmentManager) :
         FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getItem(position: Int): Fragment {
-            return FrmIv.newInstance()
+            val story = listStoryBanner[position]
+            val frmBanner = FrmBanner()
+            val bundle = Bundle()
+            bundle.putSerializable(FrmBanner.KEY_STORY, story)
+            frmBanner.arguments = bundle
+            return frmBanner
         }
 
         override fun getCount(): Int {

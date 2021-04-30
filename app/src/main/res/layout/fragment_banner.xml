@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/w_200"
@@ -8,12 +7,11 @@
     android:orientation="horizontal"
     tools:ignore="UnusedAttribute">
 
-    <com.views.viewpager.auto.LAutoViewPager
-        android:id="@+id/viewPager"
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/ivBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:avp_autoScroll="true"
-        app:avp_duration="5000"
-        app:avp_indeterminate="true" />
+        android:background="?attr/themeBackgroundColor"
+        android:contentDescription="@string/app_name" />
 
 </LinearLayout>

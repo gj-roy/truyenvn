@@ -75,6 +75,9 @@ class BannerAdapter(
             val bundle = Bundle()
             bundle.putSerializable(FrmBanner.KEY_STORY, story)
             frmBanner.arguments = bundle
+            frmBanner.onClickRootListener = {
+                onClickRootListener?.invoke(story, position)
+            }
             return frmBanner
         }
 

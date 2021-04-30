@@ -112,14 +112,16 @@ class HomeFragment : BaseFragment() {
             BannerAdapter(fragmentManager = childFragmentManager, listStoryBanner = ArrayList())
 
         bannerAdapter?.let { na ->
-            na.onClickRootListener = { _, position ->
-                showShortInformation("Click position $position")
+            na.onClickRootListener = { story, position ->
+                //TODO
+                showShortInformation("Click position $position ${story.title}")
             }
         }
 
         storyAdapter?.let { na ->
-            na.onClickRootListener = { _, position ->
-                showShortInformation("Click position $position")
+            na.onClickRootListener = { story, position ->
+                //TODO
+                showShortInformation("Click position $position ${story.title}")
             }
         }
 

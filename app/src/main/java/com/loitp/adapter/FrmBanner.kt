@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.core.utilities.LImageUtil
+import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.model.Story
 import kotlinx.android.synthetic.main.fragment_banner.*
@@ -18,6 +19,8 @@ class FrmBanner : Fragment() {
     }
 
     private var story: Story? = null
+
+    var onClickRootListener: (() -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +48,13 @@ class FrmBanner : Fragment() {
             resError = R.drawable.place_holder_error404
         )
         tvName.text = story?.title
+
+        LUIUtil.setSafeOnClickListenerElastic(
+            view = layoutRootView,
+            runnable = Runnable {
+                onClickRootListener?.invoke()
+            }
+        )
     }
 
 }

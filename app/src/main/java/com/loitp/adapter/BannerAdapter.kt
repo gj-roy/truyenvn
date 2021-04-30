@@ -39,7 +39,7 @@ class BannerAdapter(
             val scaleCircleNavigator = ScaleCircleNavigator(itemView.context)
             scaleCircleNavigator.setCircleCount(listStoryBanner.size)
             scaleCircleNavigator.setNormalCircleColor(Color.LTGRAY)
-            scaleCircleNavigator.setSelectedCircleColor(Color.RED)
+            scaleCircleNavigator.setSelectedCircleColor(Color.WHITE)
             scaleCircleNavigator.setCircleClickListener(object :
                 ScaleCircleNavigator.OnCircleClickListener {
                 override fun onClick(index: Int) {

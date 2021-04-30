@@ -3,18 +3,19 @@ package com.loitp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.annotation.LogTag
 import com.core.adapter.BaseAdapter
-import com.core.utilities.LImageUtil
-import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.model.Story
 import kotlinx.android.synthetic.main.view_row_item_banner.view.*
 
-//TODO
 @LogTag("BannerAdapter")
 class BannerAdapter(
+    private val fragmentManager: FragmentManager,
     private val listStoryBanner: ArrayList<Story>
 ) : BaseAdapter() {
 
@@ -26,37 +27,37 @@ class BannerAdapter(
         notifyDataSetChanged()
     }
 
-    inner class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(story: Story) {
-            itemView.textViewNews.text = story.title
-            LImageUtil.load(
-                context = itemView.imageView.context,
-                any = story.getImgSource(),
-                imageView = itemView.imageView
-            )
-            LUIUtil.setSafeOnClickListenerElastic(
-                view = itemView.layoutRoot,
-                runnable = Runnable {
-                    onClickRootListener?.invoke(story, bindingAdapterPosition)
-                }
-            )
+    inner class BannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind() {
+            itemView.viewPager.adapter = SamplePagerAdapter(fragmentManager)
+            itemView.viewPager.setAutoScrollEnabled(true)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        DataViewHolder(
+        BannerViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.view_row_item_banner, parent,
                 false
             )
         )
 
-    override fun getItemCount(): Int = listStoryBanner.size
+    override fun getItemCount(): Int = 1
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is DataViewHolder) {
-            holder.bind(listStoryBanner[position])
+        if (holder is BannerViewHolder) {
+            holder.bind()
         }
     }
 
+    private inner class SamplePagerAdapter(fm: FragmentManager) :
+        FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+        override fun getItem(position: Int): Fragment {
+            return FrmIv.newInstance()
+        }
+
+        override fun getCount(): Int {
+            return listStoryBanner.size
+        }
+    }
 }

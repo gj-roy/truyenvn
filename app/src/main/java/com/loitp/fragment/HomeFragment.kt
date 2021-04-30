@@ -107,7 +107,8 @@ class HomeFragment : BaseFragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         storyAdapter = StoryAdapter(ArrayList())
-        bannerAdapter = BannerAdapter(ArrayList())
+        bannerAdapter =
+            BannerAdapter(fragmentManager = childFragmentManager, listStoryBanner = ArrayList())
 
         bannerAdapter?.let { na ->
             na.onClickRootListener = { _, position ->

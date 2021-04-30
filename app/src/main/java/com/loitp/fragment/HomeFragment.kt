@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.frm_home.*
 import kotlinx.android.synthetic.main.frm_home.indicatorView
 
 //TODO refresh layout
+//TODO search
 @LogTag("HomeFragment")
 class HomeFragment : BaseFragment() {
 

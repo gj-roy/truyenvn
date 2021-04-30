@@ -16,4 +16,11 @@
         app:avp_duration="5000"
         app:avp_indeterminate="true" />
 
+    <net.lucode.hackware.magicindicator.MagicIndicator
+        android:id="@+id/magicIndicator3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="@dimen/margin_3" />
+
 </FrameLayout>

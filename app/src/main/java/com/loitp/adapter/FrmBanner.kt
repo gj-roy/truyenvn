@@ -44,6 +44,7 @@ class FrmBanner : Fragment() {
             imageView = ivBackground,
             resError = R.drawable.place_holder_error404
         )
+        tvName.text = story?.title
     }
 
 }

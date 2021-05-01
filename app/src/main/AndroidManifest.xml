@@ -33,7 +33,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <activity
-            android:name=".activity.SwipeBackLayoutActivity"
+            android:name=".activity.ReadActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode" />
     </application>
 

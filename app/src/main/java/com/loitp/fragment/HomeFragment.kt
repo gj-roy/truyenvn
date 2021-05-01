@@ -8,11 +8,10 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.annotation.LogTag
 import com.core.base.BaseFragment
-import com.core.common.Constants
 import com.core.utilities.LActivityUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
-import com.loitp.activity.SwipeBackLayoutActivity
+import com.loitp.activity.ReadActivity
 import com.loitp.adapter.StoryAdapter
 import com.loitp.adapter.LoadingAdapter
 import com.loitp.adapter.BannerAdapter
@@ -192,7 +191,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun goToReadScreen(story: Story) {
-        val intent = Intent(context, SwipeBackLayoutActivity::class.java)
+        val intent = Intent(context, ReadActivity::class.java)
         startActivity(intent)
         LActivityUtil.tranIn(context)
 

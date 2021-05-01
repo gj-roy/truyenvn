@@ -1,5 +1,6 @@
 package com.loitp.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -8,8 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.annotation.LogTag
 import com.core.base.BaseFragment
 import com.core.common.Constants
+import com.core.utilities.LActivityUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
+import com.loitp.activity.SwipeBackLayoutActivity
 import com.loitp.adapter.StoryAdapter
 import com.loitp.adapter.LoadingAdapter
 import com.loitp.adapter.BannerAdapter
@@ -128,16 +131,14 @@ class HomeFragment : BaseFragment() {
             BannerAdapter(fragmentManager = childFragmentManager, listStoryBanner = ArrayList())
 
         bannerAdapter?.let { na ->
-            na.onClickRootListener = { story, position ->
-                //TODO
-                showShortInformation("Click position $position ${story.title}")
+            na.onClickRootListener = { story, _ ->
+                goToReadScreen(story)
             }
         }
 
         storyAdapter?.let { na ->
-            na.onClickRootListener = { story, position ->
-                //TODO
-                showShortInformation("Click position $position ${story.title}")
+            na.onClickRootListener = { story, _ ->
+                goToReadScreen(story)
             }
         }
 
@@ -174,7 +175,7 @@ class HomeFragment : BaseFragment() {
     private fun loadMore() {
 //        logE("loadMore pageIndex $pageIndex, totalPage $totalPage, isLoading() ${isLoading()}")
         if (pageIndex >= totalPage) {
-            return;
+            return
         }
         if (!isLoading()) {
             concatAdapter.addAdapter(loadingAdapter)
@@ -188,5 +189,12 @@ class HomeFragment : BaseFragment() {
                 isRefresh = false
             )
         }
+    }
+
+    private fun goToReadScreen(story: Story) {
+        val intent = Intent(context, SwipeBackLayoutActivity::class.java)
+        startActivity(intent)
+        LActivityUtil.tranIn(context)
+
     }
 }

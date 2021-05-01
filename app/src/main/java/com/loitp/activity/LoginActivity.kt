@@ -70,7 +70,7 @@ class LoginActivity : BaseFontActivity() {
                             //add token
                             StoryApiClient.addAuthorization(token)
 
-                            val intent = Intent(this, MainActivity::class.java)
+                            val intent = Intent(this, HomeActivity::class.java)
                             startActivity(intent)
                             LActivityUtil.tranIn(context = this)
                             finish()

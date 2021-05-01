@@ -29,8 +29,12 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.HomeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name=".activity.SwipeBackLayoutActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode" />
     </application>
 
 </manifest>

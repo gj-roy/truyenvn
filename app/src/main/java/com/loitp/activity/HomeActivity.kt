@@ -21,16 +21,16 @@ import com.loitp.BuildConfig
 import com.loitp.R
 import com.loitp.fragment.HomeFragment
 import com.loitp.fragment.SettingFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.view_drawer_end.*
 import kotlinx.android.synthetic.main.view_drawer_main.*
 import kotlinx.android.synthetic.main.view_drawer_start.view.*
 
 @LogTag("MainActivity")
-class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun setLayoutResourceId(): Int {
-        return R.layout.activity_main
+        return R.layout.activity_home
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

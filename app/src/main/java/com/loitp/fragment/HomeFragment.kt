@@ -19,8 +19,7 @@ import com.loitp.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.frm_home.*
 import kotlinx.android.synthetic.main.frm_home.indicatorView
 
-//TODO refresh layout
-//TODO search
+//TODO request api search
 @LogTag("HomeFragment")
 class HomeFragment : BaseFragment() {
 
@@ -38,7 +37,11 @@ class HomeFragment : BaseFragment() {
         setupViews()
         setupViewModels()
 
-        mainViewModel?.getListStory(StoryApiConfiguration.PAGE_SIZE, pageIndex)
+        mainViewModel?.getListStory(
+            pageSize = StoryApiConfiguration.PAGE_SIZE,
+            pageIndex = pageIndex,
+            isRefresh = false
+        )
     }
 
     override fun setLayoutResourceId(): Int {
@@ -46,6 +49,14 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setupViews() {
+        swipeRefreshLayout.setOnRefreshListener {
+            pageIndex = 0
+            mainViewModel?.getListStory(
+                pageSize = StoryApiConfiguration.PAGE_SIZE,
+                pageIndex = pageIndex,
+                isRefresh = true
+            )
+        }
         setupDataInRecyclerView()
     }
 
@@ -56,6 +67,7 @@ class HomeFragment : BaseFragment() {
 //                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
                 val isDoing = actionData.isDoing
                 val isSuccess = actionData.isSuccess
+                val isSwipeToRefresh = actionData.isSwipeToRefresh
                 actionData.totalPages?.let {
                     totalPage = it
                 }
@@ -70,6 +82,7 @@ class HomeFragment : BaseFragment() {
                     }
 
                     if (isSuccess == true) {
+                        swipeRefreshLayout?.isRefreshing = false
                         concatAdapter.removeAdapter(loadingAdapter)
                         val listStory = actionData.data
                         if (listStory.isNullOrEmpty()) {
@@ -90,7 +103,10 @@ class HomeFragment : BaseFragment() {
                             }
 
                             //list item
-                            storyAdapter?.addData(listStory)
+                            storyAdapter?.addData(
+                                listBannerStory = listStory,
+                                isSwipeToRefresh = isSwipeToRefresh
+                            )
                         }
                     } else {
                         val error = actionData.errorResponse
@@ -166,7 +182,11 @@ class HomeFragment : BaseFragment() {
                 recyclerView.scrollToPosition(it - 1)
             }
             pageIndex++
-            mainViewModel?.getListStory(StoryApiConfiguration.PAGE_SIZE, pageIndex)
+            mainViewModel?.getListStory(
+                pageSize = StoryApiConfiguration.PAGE_SIZE,
+                pageIndex = pageIndex,
+                isRefresh = false
+            )
         }
     }
 }

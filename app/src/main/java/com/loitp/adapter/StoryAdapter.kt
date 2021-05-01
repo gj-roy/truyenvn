@@ -21,7 +21,10 @@ class StoryAdapter(
 
     var onClickRootListener: ((Story, Int) -> Unit)? = null
 
-    fun addData(listBannerStory: List<Story>) {
+    fun addData(listBannerStory: List<Story>, isSwipeToRefresh: Boolean?) {
+        if (isSwipeToRefresh == true) {
+            this.listBannerStory.clear()
+        }
         this.listBannerStory.addAll(listBannerStory)
         notifyDataSetChanged()
     }

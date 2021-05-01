@@ -6,23 +6,21 @@ import com.loitp.service.StoryRepository
 import com.loitp.service.StoryViewModel
 import com.service.livedata.ActionData
 import com.service.livedata.ActionLiveData
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainViewModel : StoryViewModel() {
-    private val logTag = "loitpp" + javaClass.simpleName
+    private val logTag = javaClass.simpleName
     private val repository = StoryRepository(StoryApiClient.apiService)
 
     val listStoryLiveData: ActionLiveData<ActionData<List<Story>>> = ActionLiveData()
 
-    fun getListStory(pageSize: Int, pageIndex: Int) {
+    fun getListStory(pageSize: Int, pageIndex: Int, isRefresh: Boolean) {
         listStoryLiveData.set(ActionData(isDoing = true))
         ioScope.launch {
             val response = repository.getListStory(
                 pageSize = pageSize,
                 pageIndex = pageIndex
             )
-            delay(2000)
             if (response.items == null || response.isSuccess == false) {
                 listStoryLiveData.postAction(
                     getErrorRequestStory(response)
@@ -36,7 +34,8 @@ class MainViewModel : StoryViewModel() {
                         data = data,
                         total = response.total,
                         totalPages = response.totalPages,
-                        page = response.page
+                        page = response.page,
+                        isSwipeToRefresh = isRefresh
                     )
                 )
             }

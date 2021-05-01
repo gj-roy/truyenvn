@@ -19,6 +19,6 @@ class StoryApiConfiguration {
         const val TIME_OUT = 30L // In second
         const val LIMIT_PAGE = 20
 
-        const val PAGE_SIZE = 50
+        const val PAGE_SIZE = 30
     }
 }

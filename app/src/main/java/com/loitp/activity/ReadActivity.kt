@@ -12,7 +12,7 @@ import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
 import kotlinx.android.synthetic.main.activity_read.*
 
 @LogTag("ReadActivity")
-@IsFullScreen(false)
+@IsFullScreen(true)
 @IsSwipeActivity(true)
 class ReadActivity : BaseFontActivity() {
 

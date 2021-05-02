@@ -79,7 +79,9 @@ class ChapActivity : BaseFontActivity() {
             }
         })
 
-        LImageUtil.load(context = this, any = Constants.URL_IMG, imageView = kbv)
+        LImageUtil.load(context = this, any = story?.getImgSource(), imageView = kbv)
+        LImageUtil.load(context = this, any = story?.getImgSource(), imageView = ivCover)
+        tvTitle.text = story?.title
 
         ivBack.setSafeOnClickListener {
             onBackPressed()

@@ -39,12 +39,33 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bkg_shadow" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/app_name"
-                    android:textColor="@color/red" />
+                    android:layout_gravity="bottom|center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_medium">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivCover"
+                        android:layout_width="@dimen/w_80"
+                        android:layout_height="@dimen/w_80"
+                        android:contentDescription="@string/app_name"
+                        app:civ_border_color="@color/white"
+                        app:civ_border_width="@dimen/w_1"
+                        tools:src="@color/red" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/app_name"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_large"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivBack"
@@ -52,8 +73,8 @@
                     android:layout_height="@dimen/w_48"
                     android:foreground="?selectableItemBackgroundBorderless"
                     android:padding="@dimen/padding_small"
-                    android:src="@drawable/ic_keyboard_backspace_white_48dp" />
-
+                    android:src="@drawable/ic_keyboard_backspace_white_48dp"
+                    tools:ignore="UnusedAttribute" />
             </com.github.florent37.shapeofview.shapes.ArcView>
 
             <androidx.appcompat.widget.AppCompatTextView

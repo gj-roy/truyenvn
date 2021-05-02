@@ -33,6 +33,9 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <activity
+            android:name=".activity.ChapActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode" />
+        <activity
             android:name=".activity.ReadActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode" />
     </application>

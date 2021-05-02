@@ -11,15 +11,14 @@ import com.core.base.BaseFragment
 import com.core.utilities.LActivityUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
-import com.loitp.activity.ReadActivity
-import com.loitp.adapter.StoryAdapter
-import com.loitp.adapter.LoadingAdapter
+import com.loitp.activity.ChapActivity
 import com.loitp.adapter.BannerAdapter
+import com.loitp.adapter.LoadingAdapter
+import com.loitp.adapter.StoryAdapter
 import com.loitp.model.Story
 import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.frm_home.*
-import kotlinx.android.synthetic.main.frm_home.indicatorView
 
 //TODO request api search
 @LogTag("HomeFragment")
@@ -191,7 +190,8 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun goToReadScreen(story: Story) {
-        val intent = Intent(context, ReadActivity::class.java)
+        val intent = Intent(context, ChapActivity::class.java)
+        intent.putExtra(ChapActivity.KEY_STORY, story)
         startActivity(intent)
         LActivityUtil.tranIn(context)
 

@@ -77,10 +77,45 @@
                     tools:ignore="UnusedAttribute" />
             </com.github.florent37.shapeofview.shapes.ArcView>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <LinearLayout
+                android:id="@+id/layoutInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/arcView"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTotalChapter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/ic_baseline_format_list_numbered_24"
+                    android:gravity="center"
+                    android:textColor="?attr/themeTextColor"
+                    android:textSize="@dimen/text_small"
+                    app:drawableTint="?attr/themeTextColor"
+                    tools:text="Số chương: 69" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvViewCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:drawableTop="@drawable/ic_baseline_remove_red_eye_24"
+                    android:gravity="center"
+                    android:textColor="?attr/themeTextColor"
+                    android:textSize="@dimen/text_small"
+                    app:drawableTint="?attr/themeTextColor"
+                    tools:text="Số lượt xem: 69" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layoutInformation"
                 android:text="@string/large_text" />
 
         </RelativeLayout>

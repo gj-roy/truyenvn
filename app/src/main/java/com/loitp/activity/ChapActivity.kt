@@ -82,6 +82,8 @@ class ChapActivity : BaseFontActivity() {
         LImageUtil.load(context = this, any = story?.getImgSource(), imageView = kbv)
         LImageUtil.load(context = this, any = story?.getImgSource(), imageView = ivCover)
         tvTitle.text = story?.title
+        tvTotalChapter.text = "Số chương: ${story?.totalChapter}"
+        tvViewCount.text = "Số lượt xem: ${story?.viewCount}"
 
         ivBack.setSafeOnClickListener {
             onBackPressed()

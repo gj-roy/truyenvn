@@ -10,6 +10,7 @@ import com.data.AdmobData
 import com.loitp.R
 
 //TODO gen keystore again
+//TODO truyen yeu thich
 
 //done
 //TODO done link link_cover string

@@ -1,6 +1,7 @@
 package com.loitp.activity
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -13,6 +14,7 @@ import com.core.common.Constants
 import com.core.utilities.LActivityUtil
 import com.core.utilities.LImageUtil
 import com.core.utilities.LSocialUtil
+import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.model.Story
 import com.loitp.service.StoryApiConfiguration
@@ -20,6 +22,7 @@ import com.loitp.viewmodels.ChapViewModel
 import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
 import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_chap.*
+import kotlinx.android.synthetic.main.fragment_banner.*
 import kotlinx.android.synthetic.main.frm_home.*
 
 @LogTag("ChapActivity")
@@ -62,6 +65,7 @@ class ChapActivity : BaseFontActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupViews() {
         swipeBackLayout.setSwipeBackListener(object : OnSwipeBackListener {
             override fun onViewPositionChanged(
@@ -84,10 +88,17 @@ class ChapActivity : BaseFontActivity() {
         tvTitle.text = story?.title
         tvTotalChapter.text = "Số chương: ${story?.totalChapter}"
         tvViewCount.text = "Số lượt xem: ${story?.viewCount}"
+        LUIUtil.setTextFromHTML(tvShortDescription, story?.description ?: "")
 
         ivBack.setSafeOnClickListener {
             onBackPressed()
         }
+        LUIUtil.setSafeOnClickListenerElastic(
+            view = tvShare,
+            runnable = Runnable {
+                LSocialUtil.shareApp(this)
+            }
+        )
     }
 
     private fun setupViewModels() {

@@ -83,13 +83,18 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/arcView"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_medium"
+                android:paddingTop="@dimen/padding_small"
+                android:paddingEnd="@dimen/padding_medium"
+                android:paddingBottom="@dimen/padding_small">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTotalChapter"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:drawableTop="@drawable/ic_baseline_format_list_numbered_24"
                     android:gravity="center"
                     android:textColor="?attr/themeTextColor"
@@ -99,10 +104,10 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvViewCount"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_weight="1"
                     android:drawableTop="@drawable/ic_baseline_remove_red_eye_24"
                     android:gravity="center"
                     android:textColor="?attr/themeTextColor"
@@ -110,12 +115,42 @@
                     app:drawableTint="?attr/themeTextColor"
                     tools:text="Số lượt xem: 69" />
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvShare"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_baseline_share_24"
+                    android:gravity="center"
+                    android:text="@string/share_app"
+                    android:textColor="?attr/themeTextColor"
+                    android:textSize="@dimen/text_small"
+                    app:drawableTint="?attr/themeTextColor" />
+
             </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvShortDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutInformation"
+                android:ellipsize="end"
+                android:maxLines="10"
+                android:paddingStart="@dimen/padding_medium"
+                android:paddingTop="@dimen/padding_small"
+                android:paddingEnd="@dimen/padding_medium"
+                android:paddingBottom="@dimen/padding_small"
+                android:singleLine="false"
+                android:textColor="?attr/themeTextColor"
+                android:textSize="@dimen/text_small"
+                android:textStyle="italic"
+                tools:text="@string/app_name" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layoutInformation"
+                android:layout_below="@+id/tvShortDescription"
                 android:text="@string/large_text" />
 
         </RelativeLayout>

@@ -33,12 +33,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bkg_shadow" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/app_name"
                     android:textColor="@color/red" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="@dimen/w_48"
+                    android:layout_height="@dimen/w_48"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:padding="@dimen/padding_small"
+                    android:src="@drawable/ic_keyboard_backspace_white_48dp" />
 
             </com.github.florent37.shapeofview.shapes.ArcView>
 

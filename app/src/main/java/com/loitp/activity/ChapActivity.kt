@@ -18,6 +18,7 @@ import com.loitp.model.Story
 import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.ChapViewModel
 import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
+import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_chap.*
 import kotlinx.android.synthetic.main.frm_home.*
 
@@ -79,6 +80,10 @@ class ChapActivity : BaseFontActivity() {
         })
 
         LImageUtil.load(context = this, any = Constants.URL_IMG, imageView = kbv)
+
+        ivBack.setSafeOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun setupViewModels() {

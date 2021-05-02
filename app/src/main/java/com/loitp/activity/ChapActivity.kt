@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_banner.*
 import kotlinx.android.synthetic.main.frm_home.*
 
 @LogTag("ChapActivity")
-@IsFullScreen(false)
+@IsFullScreen(true)
 @IsSwipeActivity(true)
 class ChapActivity : BaseFontActivity() {
 

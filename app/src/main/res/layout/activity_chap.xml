@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.views.layout.swipeback.SwipeBackLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeBackLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,11 +10,39 @@
     app:maskAlpha="125"
     app:swipeBackFactor="0.5">
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
+        style="@style/ScrollVertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/themeBackgroundColor">
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.github.florent37.shapeofview.shapes.ArcView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/w_200"
+                android:elevation="@dimen/w_1"
+                app:shape_arc_height="20dp"
+                app:shape_arc_position="bottom"
+                tools:ignore="UnusedAttribute">
+
+                <com.flaviofaria.kenburnsview.KenBurnsView
+                    android:id="@+id/kbv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/app_name"
+                    android:textColor="@color/red" />
+
+            </com.github.florent37.shapeofview.shapes.ArcView>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </com.views.layout.swipeback.SwipeBackLayout>

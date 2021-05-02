@@ -1,5 +1,6 @@
 package com.loitp.activity
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -8,7 +9,10 @@ import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
+import com.core.common.Constants
 import com.core.utilities.LActivityUtil
+import com.core.utilities.LImageUtil
+import com.core.utilities.LSocialUtil
 import com.loitp.R
 import com.loitp.model.Story
 import com.loitp.service.StoryApiConfiguration
@@ -73,6 +77,8 @@ class ChapActivity : BaseFontActivity() {
                 }
             }
         })
+
+        LImageUtil.load(context = this, any = Constants.URL_IMG, imageView = kbv)
     }
 
     private fun setupViewModels() {

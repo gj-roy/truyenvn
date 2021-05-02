@@ -196,4 +196,5 @@ class HomeFragment : BaseFragment() {
         LActivityUtil.tranIn(context)
 
     }
+
 }

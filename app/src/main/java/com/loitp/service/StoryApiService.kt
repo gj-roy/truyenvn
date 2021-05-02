@@ -1,14 +1,12 @@
 package com.loitp.service
 
+import com.loitp.model.Chap
 import com.loitp.model.Login
 import com.loitp.model.RequestLogin
 import com.loitp.model.Story
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface StoryApiService {
 
@@ -22,4 +20,11 @@ interface StoryApiService {
         @Query("PageSize") pageSize: Int,
         @Query("PageIndex") pageIndex: Int
     ): Deferred<Response<StoryApiResponse<List<Story>>>>
+
+    @GET("chapters/{comicId}/")
+    fun getListChapAsync(
+        @Path("comicId") comicId: String,
+        @Query("PageSize") pageSize: Int,
+        @Query("PageIndex") pageIndex: Int
+    ): Deferred<Response<StoryApiResponse<List<Chap>>>>
 }

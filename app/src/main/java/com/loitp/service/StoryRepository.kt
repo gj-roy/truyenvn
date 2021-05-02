@@ -1,5 +1,6 @@
 package com.loitp.service
 
+import com.loitp.model.Chap
 import com.loitp.model.Login
 import com.loitp.model.RequestLogin
 import com.loitp.model.Story
@@ -25,6 +26,19 @@ class StoryRepository(private val storyApiService: StoryApiService) : StoryBaseR
     suspend fun getListStory(pageSize: Int, pageIndex: Int): StoryApiResponse<List<Story>> =
         makeApiCall {
             storyApiService.getListStoryAsync(
+                pageSize = pageSize,
+                pageIndex = pageIndex
+            ).await()
+        }
+
+    suspend fun getListChap(
+        comicId: String,
+        pageSize: Int,
+        pageIndex: Int
+    ): StoryApiResponse<List<Chap>> =
+        makeApiCall {
+            storyApiService.getListChapAsync(
+                comicId = comicId,
                 pageSize = pageSize,
                 pageIndex = pageIndex
             ).await()

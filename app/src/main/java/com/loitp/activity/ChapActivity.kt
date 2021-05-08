@@ -9,21 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.annotation.IsFullScreen
 import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
-import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
 import com.core.utilities.LActivityUtil
-import com.core.utilities.LImageUtil
-import com.core.utilities.LSocialUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.adapter.ChapAdapter
+import com.loitp.adapter.StoryOverViewAdapter
 import com.loitp.model.Story
 import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.ChapViewModel
 import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
-import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_chap.*
-import kotlinx.android.synthetic.main.activity_chap.indicatorView
 import kotlinx.android.synthetic.main.activity_chap.recyclerView
 import kotlinx.android.synthetic.main.fragment_banner.*
 import kotlinx.android.synthetic.main.frm_home.*
@@ -42,6 +38,7 @@ class ChapActivity : BaseFontActivity() {
     private var pageIndex = 0
     private var totalPage = Int.MAX_VALUE
     private var concatAdapter = ConcatAdapter()
+    private var storyOverViewAdapter = StoryOverViewAdapter()
     private var chapAdapter: ChapAdapter? = null
 
     override fun setLayoutResourceId(): Int {
@@ -55,6 +52,8 @@ class ChapActivity : BaseFontActivity() {
         setupViews()
         setupViewModels()
 
+        //init data
+        storyOverViewAdapter.setData(story)
         getListChap()
     }
 
@@ -88,6 +87,7 @@ class ChapActivity : BaseFontActivity() {
                 }
             }
 
+            concatAdapter.addAdapter(storyOverViewAdapter)
             chapAdapter?.let {
                 concatAdapter.addAdapter(it)
             }
@@ -121,24 +121,7 @@ class ChapActivity : BaseFontActivity() {
                 }
             }
         })
-
-        LImageUtil.load(context = this, any = story?.getImgSource(), imageView = kbv)
-        LImageUtil.load(context = this, any = story?.getImgSource(), imageView = ivCover)
-        tvTitle.text = story?.title
-        tvTotalChapter.text = "Số chương: ${story?.totalChapter}"
-        tvViewCount.text = "Số lượt xem: ${story?.viewCount}"
-        LUIUtil.setTextFromHTML(tvShortDescription, story?.description ?: "")
         setupDataInRecyclerView()
-
-        ivBack.setSafeOnClickListener {
-            onBackPressed()
-        }
-        LUIUtil.setSafeOnClickListenerElastic(
-            view = tvShare,
-            runnable = Runnable {
-                LSocialUtil.shareApp(this)
-            }
-        )
     }
 
     private fun setupViewModels() {
@@ -154,11 +137,13 @@ class ChapActivity : BaseFontActivity() {
 
                 if (isDoing == true) {
                     if (actionData?.page == 0) {
-                        indicatorView.smoothToShow()
+//                        indicatorView.smoothToShow()
+                        //TODO
                     }
                 } else {
                     if (actionData?.page == 0) {
-                        indicatorView.smoothToHide()
+//                        indicatorView.smoothToHide()
+                        //TODO
                     }
 
                     if (isSuccess == true) {

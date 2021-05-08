@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.views.layout.swipeback.SwipeBackLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeBackLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,167 +9,11 @@
     app:maskAlpha="125"
     app:swipeBackFactor="0.5">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         style="@style/ScrollVertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/themeBackgroundColor">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.github.florent37.shapeofview.shapes.ArcView
-                android:id="@+id/arcView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/w_250"
-                android:elevation="@dimen/w_1"
-                app:shape_arc_height="45dp"
-                app:shape_arc_position="bottom"
-                tools:ignore="UnusedAttribute">
-
-                <com.flaviofaria.kenburnsview.KenBurnsView
-                    android:id="@+id/kbv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bkg_shadow" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding_medium">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/ivCover"
-                        android:layout_width="@dimen/w_80"
-                        android:layout_height="@dimen/w_80"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/app_name"
-                        app:civ_border_color="@color/white"
-                        app:civ_border_width="@dimen/w_1"
-                        tools:src="@color/red" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:text="@string/app_name"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/txt_large"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivBack"
-                    android:layout_width="@dimen/w_48"
-                    android:layout_height="@dimen/w_48"
-                    android:foreground="?selectableItemBackgroundBorderless"
-                    android:padding="@dimen/padding_small"
-                    android:src="@drawable/ic_keyboard_backspace_white_48dp"
-                    tools:ignore="UnusedAttribute" />
-            </com.github.florent37.shapeofview.shapes.ArcView>
-
-            <LinearLayout
-                android:id="@+id/layoutInformation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/arcView"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/padding_medium"
-                android:paddingTop="@dimen/padding_medium"
-                android:paddingEnd="@dimen/padding_medium"
-                android:paddingBottom="@dimen/padding_medium">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvTotalChapter"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/ic_baseline_format_list_numbered_24"
-                    android:gravity="center"
-                    android:textColor="?attr/themeTextColor"
-                    android:textSize="@dimen/text_small"
-                    app:drawableTint="?attr/themeTextColor"
-                    tools:text="Số chương: 69" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvViewCount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/ic_baseline_remove_red_eye_24"
-                    android:gravity="center"
-                    android:textColor="?attr/themeTextColor"
-                    android:textSize="@dimen/text_small"
-                    app:drawableTint="?attr/themeTextColor"
-                    tools:text="Số lượt xem: 69" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvShare"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/ic_baseline_share_24"
-                    android:gravity="center"
-                    android:text="@string/share_app"
-                    android:textColor="?attr/themeTextColor"
-                    android:textSize="@dimen/text_small"
-                    app:drawableTint="?attr/themeTextColor" />
-
-            </LinearLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvShortDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layoutInformation"
-                android:ellipsize="end"
-                android:maxLines="15"
-                android:paddingStart="@dimen/padding_medium"
-                android:paddingTop="@dimen/padding_medium"
-                android:paddingEnd="@dimen/padding_medium"
-                android:paddingBottom="@dimen/padding_medium"
-                android:singleLine="false"
-                android:textColor="?attr/themeTextColor"
-                android:textSize="@dimen/text_small"
-                tools:text="@string/app_name" />
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/tvShortDescription"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.wang.avi.AVLoadingIndicatorView
-                    android:id="@+id/indicatorView"
-                    style="@style/AVLoadingIndicatorView.Large"
-                    android:layout_width="@dimen/w_50"
-                    android:layout_height="@dimen/w_50"
-                    app:indicatorColor="?attr/themeTextColor"
-                    app:indicatorName="PacmanIndicator" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    style="@style/ScrollVertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
+        android:background="?attr/themeBackgroundColor" />
 
 </com.views.layout.swipeback.SwipeBackLayout>

@@ -23,7 +23,7 @@
             <com.github.florent37.shapeofview.shapes.ArcView
                 android:id="@+id/arcView"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/w_200"
+                android:layout_height="@dimen/w_250"
                 android:elevation="@dimen/w_1"
                 app:shape_arc_height="45dp"
                 app:shape_arc_position="bottom"
@@ -40,7 +40,7 @@
                     android:background="@drawable/bkg_shadow" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:orientation="vertical"
@@ -50,6 +50,7 @@
                         android:id="@+id/ivCover"
                         android:layout_width="@dimen/w_80"
                         android:layout_height="@dimen/w_80"
+                        android:layout_gravity="center"
                         android:contentDescription="@string/app_name"
                         app:civ_border_color="@color/white"
                         app:civ_border_width="@dimen/w_1"
@@ -61,6 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:maxLines="1"
                         android:text="@string/app_name"
                         android:textColor="@color/white"
                         android:textSize="@dimen/txt_large"

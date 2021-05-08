@@ -10,13 +10,11 @@ import com.annotation.IsFullScreen
 import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
 import com.core.base.BaseFontActivity
-import com.core.utilities.LActivityUtil
-import com.core.utilities.LImageUtil
-import com.core.utilities.LSocialUtil
-import com.core.utilities.LUIUtil
+import com.core.utilities.*
 import com.loitp.R
 import com.loitp.adapter.ChapAdapter
 import com.loitp.adapter.StoryOverViewAdapter
+import com.loitp.db.Db
 import com.loitp.model.Story
 import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.ChapViewModel
@@ -51,6 +49,11 @@ class ChapActivity : BaseFontActivity() {
         setupData()
         setupViews()
         setupViewModels()
+
+        //save last story
+        story?.getImgSource()?.let {
+            Db.setLastBackground(it)
+        }
 
         getListChap()
     }

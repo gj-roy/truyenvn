@@ -3,7 +3,6 @@ package com.loitp.app
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.common.Constants
-import com.core.utilities.LSharedPrefsUtil
 import com.core.utilities.LUIUtil
 import com.data.ActivityData
 import com.data.AdmobData

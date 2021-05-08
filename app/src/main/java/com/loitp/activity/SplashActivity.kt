@@ -17,8 +17,11 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.loitp.BuildConfig
 import com.loitp.R
+import com.loitp.db.Db
 import com.model.GG
+import kotlinx.android.synthetic.main.activity_chap.*
 import kotlinx.android.synthetic.main.activity_splash.*
+import kotlinx.android.synthetic.main.activity_splash.ivBackground
 import okhttp3.Call
 
 @LogTag("SplashActivity")
@@ -39,6 +42,11 @@ class SplashActivity : BaseFontActivity() {
             isAnimDone = true
             goToHome()
         })
+        LImageUtil.load(
+            context = this,
+            any = Db.getLastBackground(),
+            imageView = ivBackground
+        )
         textViewVersion.text = "Version ${BuildConfig.VERSION_NAME}"
         tvPolicy.setOnClickListener {
             LSocialUtil.openBrowserPolicy(context = this)

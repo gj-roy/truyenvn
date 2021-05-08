@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.annotation.IsFullScreen
 import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
+import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
 import com.core.utilities.*
 import com.loitp.R
 import com.loitp.adapter.ChapAdapter
+import com.loitp.adapter.LoadingAdapter
 import com.loitp.adapter.StoryOverViewAdapter
 import com.loitp.db.Db
 import com.loitp.model.Story
@@ -20,6 +22,10 @@ import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.ChapViewModel
 import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
 import kotlinx.android.synthetic.main.activity_chap.*
+import kotlinx.android.synthetic.main.activity_chap.indicatorView
+import kotlinx.android.synthetic.main.activity_chap.ivBackground
+import kotlinx.android.synthetic.main.activity_chap.recyclerView
+import kotlinx.android.synthetic.main.frm_home.*
 import kotlinx.android.synthetic.main.view_row_item_story.view.*
 
 @LogTag("ChapActivity")
@@ -36,6 +42,7 @@ class ChapActivity : BaseFontActivity() {
     private var pageIndex = 0
     private var totalPage = Int.MAX_VALUE
     private var concatAdapter = ConcatAdapter()
+    private val loadingAdapter = LoadingAdapter()
     private var storyOverViewAdapter = StoryOverViewAdapter()
     private var chapAdapter: ChapAdapter? = null
 
@@ -108,7 +115,7 @@ class ChapActivity : BaseFontActivity() {
                 },
                 onBottom = {
                     logD("loitpp onBottom")
-                    //TODO
+                    loadMore()
                 }
             )
         }
@@ -141,7 +148,7 @@ class ChapActivity : BaseFontActivity() {
         chapViewModel = getViewModel(ChapViewModel::class.java)
         chapViewModel?.let { mvm ->
             mvm.listStoryLiveData.observe(this, Observer { actionData ->
-//                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
+                logD("loitpp <<<listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
                 val isDoing = actionData.isDoing
                 val isSuccess = actionData.isSuccess
                 actionData.totalPages?.let {
@@ -162,6 +169,7 @@ class ChapActivity : BaseFontActivity() {
                     }
 
                     if (isSuccess == true) {
+                        concatAdapter.removeAdapter(loadingAdapter)
                         val listChap = actionData.data
                         if (listChap.isNullOrEmpty()) {
                             //do nothing
@@ -182,19 +190,43 @@ class ChapActivity : BaseFontActivity() {
 
     }
 
-    private fun setupStoryOverviewUI() {
-        fun isHasStoryOverViewAdapter(): Boolean {
-            concatAdapter.adapters.forEach { childAdapter ->
-                if (childAdapter == storyOverViewAdapter) {
-                    return true
-                }
+    private fun isLoading(): Boolean {
+        concatAdapter.adapters.forEach { childAdapter ->
+            if (childAdapter == loadingAdapter) {
+                return true
             }
-            return false
         }
+        return false
+    }
 
+    private fun isHasStoryOverViewAdapter(): Boolean {
+        concatAdapter.adapters.forEach { childAdapter ->
+            if (childAdapter == storyOverViewAdapter) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun setupStoryOverviewUI() {
         if (!isHasStoryOverViewAdapter()) {
             storyOverViewAdapter.setData(story)
             concatAdapter.addAdapter(0, storyOverViewAdapter)
+        }
+    }
+
+    private fun loadMore() {
+        logE("loitpp loadMore pageIndex $pageIndex, totalPage $totalPage, isLoading() ${isLoading()}")
+        if (pageIndex >= totalPage) {
+            return
+        }
+        if (!isLoading()) {
+            concatAdapter.addAdapter(loadingAdapter)
+            concatAdapter.itemCount.let {
+                recyclerView.scrollToPosition(it - 1)
+            }
+            pageIndex++
+            getListChap()
         }
     }
 

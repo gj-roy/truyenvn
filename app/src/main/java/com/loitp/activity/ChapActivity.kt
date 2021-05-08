@@ -91,7 +91,7 @@ class ChapActivity : BaseFontActivity() {
             chapAdapter = ChapAdapter(ArrayList())
             chapAdapter?.let { na ->
                 na.onClickRootListener = { chap, _ ->
-                    //TODO
+                    //TODO click read
                 }
             }
 

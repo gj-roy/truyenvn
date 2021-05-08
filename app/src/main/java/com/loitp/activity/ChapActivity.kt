@@ -1,6 +1,5 @@
 package com.loitp.activity
 
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
@@ -10,7 +9,6 @@ import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
-import com.core.common.Constants
 import com.core.utilities.LActivityUtil
 import com.core.utilities.LImageUtil
 import com.core.utilities.LSocialUtil
@@ -23,7 +21,6 @@ import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
 import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_chap.*
 import kotlinx.android.synthetic.main.fragment_banner.*
-import kotlinx.android.synthetic.main.frm_home.*
 
 @LogTag("ChapActivity")
 @IsFullScreen(true)
@@ -37,6 +34,7 @@ class ChapActivity : BaseFontActivity() {
     private var story: Story? = null
     private var chapViewModel: ChapViewModel? = null
     private var pageIndex = 0
+    private var totalPage = Int.MAX_VALUE
 
     override fun setLayoutResourceId(): Int {
         return R.layout.activity_chap
@@ -49,6 +47,10 @@ class ChapActivity : BaseFontActivity() {
         setupViews()
         setupViewModels()
 
+        getListChap()
+    }
+
+    private fun getListChap() {
         story?.id?.let { comicId ->
             chapViewModel?.getListChap(
                 comicId,
@@ -105,26 +107,24 @@ class ChapActivity : BaseFontActivity() {
         chapViewModel = getViewModel(ChapViewModel::class.java)
         chapViewModel?.let { mvm ->
             mvm.listStoryLiveData.observe(this, Observer { actionData ->
-                logD("<<<loitpp listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
                 //TODO
-//                val isDoing = actionData.isDoing
-//                val isSuccess = actionData.isSuccess
-//                val isSwipeToRefresh = actionData.isSwipeToRefresh
-//                actionData.totalPages?.let {
-//                    totalPage = it
-//                }
-//
-//                if (isDoing == true) {
-//                    if (actionData?.page == 0) {
-//                        indicatorView.smoothToShow()
-//                    }
-//                } else {
-//                    if (actionData?.page == 0) {
-//                        indicatorView.smoothToHide()
-//                    }
-//
-//                    if (isSuccess == true) {
-//                        swipeRefreshLayout?.isRefreshing = false
+                logD("<<<loitpp listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
+                val isDoing = actionData.isDoing
+                val isSuccess = actionData.isSuccess
+                actionData.totalPages?.let {
+                    totalPage = it
+                }
+
+                if (isDoing == true) {
+                    if (actionData?.page == 0) {
+                        indicatorView.smoothToShow()
+                    }
+                } else {
+                    if (actionData?.page == 0) {
+                        indicatorView.smoothToHide()
+                    }
+
+                    if (isSuccess == true) {
 //                        concatAdapter.removeAdapter(loadingAdapter)
 //                        val listStory = actionData.data
 //                        if (listStory.isNullOrEmpty()) {
@@ -150,13 +150,13 @@ class ChapActivity : BaseFontActivity() {
 //                                isSwipeToRefresh = isSwipeToRefresh
 //                            )
 //                        }
-//                    } else {
-//                        val error = actionData.errorResponse
-//                        showDialogError(error?.message ?: getString(R.string.err_unknow), Runnable {
-//                            //do nothing
-//                        })
-//                    }
-//                }
+                    } else {
+                        val error = actionData.errorResponse
+                        showDialogError(error?.message ?: getString(R.string.err_unknow), Runnable {
+                            //do nothing
+                        })
+                    }
+                }
             })
         }
 

@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.annotation.LogTag
 import com.core.base.BaseFragment
 import com.core.utilities.LActivityUtil
+import com.core.utilities.LImageUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.activity.ChapActivity
 import com.loitp.adapter.BannerAdapter
 import com.loitp.adapter.LoadingAdapter
 import com.loitp.adapter.StoryAdapter
+import com.loitp.db.Db
 import com.loitp.model.Story
 import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.MainViewModel
@@ -47,6 +49,16 @@ class HomeFragment : BaseFragment() {
 
     override fun setLayoutResourceId(): Int {
         return R.layout.frm_home
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        LImageUtil.load(
+            context = context,
+            any = Db.getLastBackground(),
+            imageView = ivBackground
+        )
     }
 
     private fun setupViews() {

@@ -8,10 +8,14 @@ import com.annotation.LogTag
 import com.core.base.BaseFragment
 import com.core.utilities.LActivityUtil
 import com.core.utilities.LDialogUtil
+import com.core.utilities.LImageUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.activity.SplashActivity
+import com.loitp.db.Db
+import kotlinx.android.synthetic.main.frm_home.*
 import kotlinx.android.synthetic.main.frm_setting.*
+import kotlinx.android.synthetic.main.frm_setting.ivBackground
 
 @LogTag("SettingFragment")
 class SettingFragment : BaseFragment() {
@@ -24,6 +28,16 @@ class SettingFragment : BaseFragment() {
 
     override fun setLayoutResourceId(): Int {
         return R.layout.frm_setting
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        LImageUtil.load(
+            context = context,
+            any = Db.getLastBackground(),
+            imageView = ivBackground
+        )
     }
 
     override fun onDestroy() {

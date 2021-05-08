@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/themeBackgroundColorMedium"
-    android:orientation="vertical">
+    android:background="?attr/themeBackgroundColorMedium">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/logo" />
+
+    <com.github.mmin18.widget.RealtimeBlurView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:realtimeBlurRadius="@dimen/round_medium"
+        app:realtimeOverlayColor="?attr/themeBackgroundColor50" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         style="@style/ScrollVertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:fillViewport="true">
 
         <LinearLayout
@@ -34,4 +46,4 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+</FrameLayout>

@@ -16,6 +16,7 @@ class ChapViewModel : StoryViewModel() {
 
     fun getListChap(comicId: String, pageSize: Int, pageIndex: Int) {
         listStoryLiveData.set(ActionData(isDoing = true))
+        logD("getListChap comicId $comicId")
         ioScope.launch {
             val response = repository.getListChap(
                 comicId = comicId,
@@ -27,7 +28,7 @@ class ChapViewModel : StoryViewModel() {
                     getErrorRequestStory(response)
                 )
             } else {
-                val data = response.items.reversed()
+                val data = response.items
                 listStoryLiveData.post(
                     ActionData(
                         isDoing = false,

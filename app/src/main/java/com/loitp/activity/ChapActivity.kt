@@ -21,9 +21,6 @@ import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.ChapViewModel
 import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
 import kotlinx.android.synthetic.main.activity_chap.*
-import kotlinx.android.synthetic.main.activity_chap.recyclerView
-import kotlinx.android.synthetic.main.fragment_banner.*
-import kotlinx.android.synthetic.main.frm_home.*
 
 @LogTag("ChapActivity")
 @IsFullScreen(true)
@@ -142,8 +139,7 @@ class ChapActivity : BaseFontActivity() {
 
                 if (isDoing == true) {
                     if (actionData?.page == 0) {
-//                        indicatorView.smoothToShow()
-                        //TODO
+                        indicatorView.smoothToShow()
                     }
                 } else {
 
@@ -151,8 +147,7 @@ class ChapActivity : BaseFontActivity() {
                     setupStoryOverviewUI()
 
                     if (actionData?.page == 0) {
-//                        indicatorView.smoothToHide()
-                        //TODO
+                        indicatorView.smoothToHide()
                     }
 
                     if (isSuccess == true) {

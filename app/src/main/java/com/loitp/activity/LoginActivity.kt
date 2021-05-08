@@ -8,12 +8,17 @@ import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
 import com.core.utilities.LActivityUtil
+import com.core.utilities.LImageUtil
 import com.core.utilities.LValidateUtil
 import com.loitp.BuildConfig
 import com.loitp.R
+import com.loitp.db.Db
 import com.loitp.service.StoryApiClient
 import com.loitp.viewmodels.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.indicatorView
+import kotlinx.android.synthetic.main.activity_login.ivBackground
+import kotlinx.android.synthetic.main.activity_splash.*
 
 @LogTag("LoginActivity")
 @IsFullScreen(false)
@@ -40,7 +45,11 @@ class LoginActivity : BaseFontActivity() {
     }
 
     private fun setupViews() {
-        //do nothing
+        LImageUtil.load(
+            context = this,
+            any = Db.getLastBackground(),
+            imageView = ivBackground
+        )
     }
 
     private fun setupViewModels() {

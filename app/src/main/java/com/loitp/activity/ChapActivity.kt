@@ -52,8 +52,6 @@ class ChapActivity : BaseFontActivity() {
         setupViews()
         setupViewModels()
 
-        //init data
-        storyOverViewAdapter.setData(story)
         getListChap()
     }
 
@@ -87,7 +85,6 @@ class ChapActivity : BaseFontActivity() {
                 }
             }
 
-            concatAdapter.addAdapter(storyOverViewAdapter)
             chapAdapter?.let {
                 concatAdapter.addAdapter(it)
             }
@@ -141,6 +138,10 @@ class ChapActivity : BaseFontActivity() {
                         //TODO
                     }
                 } else {
+
+                    //set ui for story over
+                    setupStoryOverviewUI()
+
                     if (actionData?.page == 0) {
 //                        indicatorView.smoothToHide()
                         //TODO
@@ -165,6 +166,22 @@ class ChapActivity : BaseFontActivity() {
             })
         }
 
+    }
+
+    private fun setupStoryOverviewUI() {
+        fun isHasStoryOverViewAdapter(): Boolean {
+            concatAdapter.adapters.forEach { childAdapter ->
+                if (childAdapter == storyOverViewAdapter) {
+                    return true
+                }
+            }
+            return false
+        }
+
+        if (!isHasStoryOverViewAdapter()) {
+            storyOverViewAdapter.setData(story)
+            concatAdapter.addAdapter(0, storyOverViewAdapter)
+        }
     }
 
 }

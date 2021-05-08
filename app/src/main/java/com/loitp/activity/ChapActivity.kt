@@ -11,6 +11,7 @@ import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
 import com.core.base.BaseFontActivity
 import com.core.utilities.LActivityUtil
+import com.core.utilities.LImageUtil
 import com.core.utilities.LSocialUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
@@ -21,6 +22,7 @@ import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.ChapViewModel
 import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
 import kotlinx.android.synthetic.main.activity_chap.*
+import kotlinx.android.synthetic.main.view_row_item_story.view.*
 
 @LogTag("ChapActivity")
 @IsFullScreen(true)
@@ -107,6 +109,12 @@ class ChapActivity : BaseFontActivity() {
                 }
             )
         }
+
+        LImageUtil.load(
+            context = this,
+            any = story?.getImgSource(),
+            imageView = ivBackground
+        )
 
         swipeBackLayout.setSwipeBackListener(object : OnSwipeBackListener {
             override fun onViewPositionChanged(

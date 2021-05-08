@@ -51,7 +51,7 @@ class ChapAdapter(
     override fun getItemCount(): Int = listChap.size
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is DataViewHolder) {
-            logD("loitpp onBindViewHolder position $position")
+//            logD("onBindViewHolder position $position")
             holder.bind(listChap[position])
         }
     }

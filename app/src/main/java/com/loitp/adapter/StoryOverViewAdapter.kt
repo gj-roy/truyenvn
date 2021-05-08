@@ -18,6 +18,9 @@ import kotlinx.android.synthetic.main.view_row_item_story_overview.view.*
 class StoryOverViewAdapter : BaseAdapter() {
     var story: Story? = null
 
+    var onClickBackListener: ((Unit) -> Unit)? = null
+    var onClickShareListener: ((Unit) -> Unit)? = null
+
     fun setData(story: Story?) {
         this.story = story
         notifyDataSetChanged()
@@ -45,14 +48,12 @@ class StoryOverViewAdapter : BaseAdapter() {
             )
 
             itemView.ivBack.setSafeOnClickListener {
-                //TODO
-//                onBackPressed()
+                onClickBackListener?.invoke(Unit)
             }
             LUIUtil.setSafeOnClickListenerElastic(
                 view = itemView.tvShare,
                 runnable = Runnable {
-                    //TODO
-//                    LSocialUtil.shareApp(this)
+                    onClickShareListener?.invoke(Unit)
                 }
             )
         }

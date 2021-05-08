@@ -11,6 +11,7 @@ import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
 import com.core.base.BaseFontActivity
 import com.core.utilities.LActivityUtil
+import com.core.utilities.LSocialUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.adapter.ChapAdapter
@@ -83,6 +84,13 @@ class ChapActivity : BaseFontActivity() {
                 na.onClickRootListener = { chap, _ ->
                     //TODO
                 }
+            }
+
+            storyOverViewAdapter.onClickBackListener = {
+                onBackPressed()
+            }
+            storyOverViewAdapter.onClickShareListener = {
+                LSocialUtil.shareApp(this)
             }
 
             chapAdapter?.let {

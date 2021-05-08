@@ -107,7 +107,7 @@ class ChapActivity : BaseFontActivity() {
         chapViewModel = getViewModel(ChapViewModel::class.java)
         chapViewModel?.let { mvm ->
             mvm.listStoryLiveData.observe(this, Observer { actionData ->
-                //TODO
+                //TODO iplm list chap
                 logD("<<<loitpp listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
                 val isDoing = actionData.isDoing
                 val isSuccess = actionData.isSuccess

@@ -188,9 +188,8 @@ class SplashActivity : BaseFontActivity() {
                     return false
                 }
 
-//              val isReady = isReady()
-                //TODO hard code isReady
-                val isReady = true
+                val isReady = isReady()
+//                val isReady = true
                 if (isReady) {
                     LPrefUtil.setCheckAppReady(value = true)
                     setReady()

@@ -27,7 +27,7 @@ class ChapViewModel : StoryViewModel() {
                     getErrorRequestStory(response)
                 )
             } else {
-                val data = response.items
+                val data = response.items.reversed()
                 listStoryLiveData.post(
                     ActionData(
                         isDoing = false,

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_medium"
+    android:layout_marginTop="@dimen/margin_small"
+    android:layout_marginEnd="@dimen/margin_medium"
+    android:layout_marginBottom="@dimen/margin_small"
+    app:cardBackgroundColor="?attr/themeBackgroundColorMedium"
+    app:cardCornerRadius="@dimen/round_medium"
+    app:cardElevation="@dimen/w_1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNoChapter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/themeTextColor"
+            android:gravity="center"
+            android:padding="@dimen/padding_medium"
+            android:singleLine="true"
+            android:textColor="?attr/themeBackgroundColor"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold"
+            tools:text="1000" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_weight="1"
+            android:gravity="center|start"
+            android:textColor="?attr/themeTextColor"
+            android:textSize="@dimen/txt_medium"
+            tools:text="@string/app_name" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/w_50"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_small"
+            android:src="@drawable/ic_chevron_right_black_48dp"
+            app:tint="?attr/themeTextColor" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

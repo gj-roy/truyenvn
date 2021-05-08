@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.annotation.IsFullScreen
 import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
@@ -14,13 +16,17 @@ import com.core.utilities.LImageUtil
 import com.core.utilities.LSocialUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
+import com.loitp.adapter.ChapAdapter
 import com.loitp.model.Story
 import com.loitp.service.StoryApiConfiguration
 import com.loitp.viewmodels.ChapViewModel
 import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
 import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_chap.*
+import kotlinx.android.synthetic.main.activity_chap.indicatorView
+import kotlinx.android.synthetic.main.activity_chap.recyclerView
 import kotlinx.android.synthetic.main.fragment_banner.*
+import kotlinx.android.synthetic.main.frm_home.*
 
 @LogTag("ChapActivity")
 @IsFullScreen(true)
@@ -35,6 +41,8 @@ class ChapActivity : BaseFontActivity() {
     private var chapViewModel: ChapViewModel? = null
     private var pageIndex = 0
     private var totalPage = Int.MAX_VALUE
+    private var concatAdapter = ConcatAdapter()
+    private var chapAdapter: ChapAdapter? = null
 
     override fun setLayoutResourceId(): Int {
         return R.layout.activity_chap
@@ -53,9 +61,9 @@ class ChapActivity : BaseFontActivity() {
     private fun getListChap() {
         story?.id?.let { comicId ->
             chapViewModel?.getListChap(
-                comicId,
-                StoryApiConfiguration.PAGE_SIZE,
-                pageIndex
+                comicId = comicId,
+                pageSize = StoryApiConfiguration.PAGE_SIZE,
+                pageIndex = pageIndex
             )
         }
     }
@@ -69,6 +77,35 @@ class ChapActivity : BaseFontActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun setupViews() {
+
+        fun setupDataInRecyclerView() {
+            recyclerView.layoutManager = LinearLayoutManager(this)
+
+            chapAdapter = ChapAdapter(ArrayList())
+            chapAdapter?.let { na ->
+                na.onClickRootListener = { chap, _ ->
+                    //TODO
+                }
+            }
+
+            chapAdapter?.let {
+                concatAdapter.addAdapter(it)
+            }
+
+            recyclerView.adapter = concatAdapter
+
+            LUIUtil.setScrollChange(
+                recyclerView = recyclerView,
+                onTop = {
+                    logD("onTop")
+                },
+                onBottom = {
+                    logD("loitpp onBottom")
+                    //TODO
+                }
+            )
+        }
+
         swipeBackLayout.setSwipeBackListener(object : OnSwipeBackListener {
             override fun onViewPositionChanged(
                 mView: View?,
@@ -91,6 +128,7 @@ class ChapActivity : BaseFontActivity() {
         tvTotalChapter.text = "Số chương: ${story?.totalChapter}"
         tvViewCount.text = "Số lượt xem: ${story?.viewCount}"
         LUIUtil.setTextFromHTML(tvShortDescription, story?.description ?: "")
+        setupDataInRecyclerView()
 
         ivBack.setSafeOnClickListener {
             onBackPressed()
@@ -107,8 +145,7 @@ class ChapActivity : BaseFontActivity() {
         chapViewModel = getViewModel(ChapViewModel::class.java)
         chapViewModel?.let { mvm ->
             mvm.listStoryLiveData.observe(this, Observer { actionData ->
-                //TODO iplm list chap
-                logD("<<<loitpp listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
+//                logD("<<<listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
                 val isDoing = actionData.isDoing
                 val isSuccess = actionData.isSuccess
                 actionData.totalPages?.let {
@@ -125,31 +162,14 @@ class ChapActivity : BaseFontActivity() {
                     }
 
                     if (isSuccess == true) {
-//                        concatAdapter.removeAdapter(loadingAdapter)
-//                        val listStory = actionData.data
-//                        if (listStory.isNullOrEmpty()) {
-//                            if (storyAdapter?.itemCount == 0) {
-//                                tvNoData.visibility = View.VISIBLE
-//                            }
-//                        } else {
-//                            tvNoData.visibility = View.GONE
-//
-//                            //banner
-//                            val listBannerStory = ArrayList<Story>()
-//                            if (listStory is ArrayList) {
-//                                if (listStory.size > 5) {
-//                                    listBannerStory.addAll(listStory)
-//                                    listBannerStory.shuffle()
-//                                    bannerAdapter?.setData(listBannerStory.subList(0, 5))
-//                                }
-//                            }
-//
-//                            //list item
-//                            storyAdapter?.addData(
-//                                listBannerStory = listStory,
-//                                isSwipeToRefresh = isSwipeToRefresh
-//                            )
-//                        }
+                        val listChap = actionData.data
+                        if (listChap.isNullOrEmpty()) {
+                            //do nothing
+                        } else {
+                            chapAdapter?.addData(
+                                listChap = listChap
+                            )
+                        }
                     } else {
                         val error = actionData.errorResponse
                         showDialogError(error?.message ?: getString(R.string.err_unknow), Runnable {

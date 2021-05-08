@@ -163,10 +163,11 @@
                     app:indicatorColor="?attr/themeTextColor"
                     app:indicatorName="PacmanIndicator" />
 
-<!--                <androidx.appcompat.widget.AppCompatTextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/large_text" />-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    style="@style/ScrollVertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </RelativeLayout>

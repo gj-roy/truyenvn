@@ -17,7 +17,6 @@
             android:layout_height="match_parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/indicatorView"
         style="@style/AVLoadingIndicatorView.Large"

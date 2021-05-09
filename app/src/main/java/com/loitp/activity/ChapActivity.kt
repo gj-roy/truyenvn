@@ -92,6 +92,7 @@ class ChapActivity : BaseFontActivity() {
             chapAdapter = ChapAdapter(ArrayList())
             chapAdapter?.let { na ->
                 na.onClickRootListener = { chap, _ ->
+                    //TODO
                     val intent = Intent(this, ReadActivity::class.java)
 //                    intent.putExtra(ChapActivity.KEY_STORY, story)
                     startActivity(intent)

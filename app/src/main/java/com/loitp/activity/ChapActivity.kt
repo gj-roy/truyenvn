@@ -1,6 +1,7 @@
 package com.loitp.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -91,7 +92,10 @@ class ChapActivity : BaseFontActivity() {
             chapAdapter = ChapAdapter(ArrayList())
             chapAdapter?.let { na ->
                 na.onClickRootListener = { chap, _ ->
-                    //TODO click read
+                    val intent = Intent(this, ReadActivity::class.java)
+//                    intent.putExtra(ChapActivity.KEY_STORY, story)
+                    startActivity(intent)
+                    LActivityUtil.tranIn(this)
                 }
             }
 

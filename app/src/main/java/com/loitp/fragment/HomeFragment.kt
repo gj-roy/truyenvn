@@ -206,7 +206,6 @@ class HomeFragment : BaseFragment() {
         intent.putExtra(ChapActivity.KEY_STORY, story)
         startActivity(intent)
         LActivityUtil.tranIn(context)
-
     }
 
 }

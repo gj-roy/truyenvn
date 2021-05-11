@@ -13,40 +13,55 @@
     app:cardCornerRadius="@dimen/round_medium"
     app:cardElevation="@dimen/w_1">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNoChapter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?attr/themeTextColor"
+                android:gravity="center"
+                android:padding="@dimen/padding_medium"
+                android:singleLine="true"
+                android:textColor="?attr/themeBackgroundColor"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="bold"
+                tools:text="1000" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_weight="1"
+                android:gravity="center|start"
+                android:textColor="?attr/themeTextColor"
+                android:textSize="@dimen/txt_medium"
+                tools:text="@string/app_name" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/w_30"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_chevron_right_black_48dp"
+                app:tint="?attr/themeTextColor" />
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvNoChapter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="?attr/themeTextColor"
-            android:gravity="center"
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:padding="@dimen/padding_medium"
-            android:singleLine="true"
-            android:textColor="?attr/themeBackgroundColor"
-            android:textSize="@dimen/text_medium"
-            android:textStyle="bold"
-            tools:text="1000" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTitle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:layout_weight="1"
-            android:gravity="center|start"
             android:textColor="?attr/themeTextColor"
             android:textSize="@dimen/txt_medium"
             tools:text="@string/app_name" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/w_30"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_chevron_right_black_48dp"
-            app:tint="?attr/themeTextColor" />
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.cardview.widget.CardView>

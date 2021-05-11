@@ -29,6 +29,7 @@ class ChapAdapter(
         fun bind(chap: Chap) {
             itemView.tvNoChapter.text = "${chap.noChapter}"
             itemView.tvTitle.text = chap.title
+            LUIUtil.setTextFromHTML(textView = itemView.tvDescription, bodyData = chap.description)
 
             LUIUtil.setSafeOnClickListenerElastic(
                 view = itemView.layoutRoot,

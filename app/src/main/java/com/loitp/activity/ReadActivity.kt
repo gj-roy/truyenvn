@@ -2,6 +2,7 @@ package com.loitp.activity
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.NestedScrollView
 import com.annotation.IsFullScreen
 import com.annotation.IsShowAdWhenExit
 import com.annotation.IsSwipeActivity
@@ -12,7 +13,9 @@ import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.model.Chap
 import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
+import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_read.*
+
 
 @LogTag("ReadActivity")
 @IsFullScreen(false)
@@ -20,13 +23,12 @@ import kotlinx.android.synthetic.main.activity_read.*
 @IsShowAdWhenExit(true)
 class ReadActivity : BaseFontActivity() {
     //TODO animation
-    //TODO text size
-    //TODO text share
     companion object {
         const val KEY_CHAP = "KEY_CHAP"
     }
 
     private var chap: Chap? = null
+    private var isScrollDown = false
 
     override fun setLayoutResourceId(): Int {
         return R.layout.activity_read
@@ -68,7 +70,32 @@ class ReadActivity : BaseFontActivity() {
             textView = tvDescription,
             bodyData = chap?.description ?: getString(R.string.no_data)
         )
+        nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            if (scrollY > oldScrollY) {
+                if (!isScrollDown) {
+                    isScrollDown = true
+                    logD("loitpp Scroll DOWN")
+                    layoutControl.visibility = View.GONE
+                }
+            }
+            if (scrollY < oldScrollY) {
+                if (isScrollDown) {
+                    isScrollDown = false
+                    logD("loitpp Scroll UP")
+                    layoutControl.visibility = View.VISIBLE
+                }
+            }
+        })
 
+        btShare.setSafeOnClickListener {
+            //TODO
+        }
+        btMinusSize.setSafeOnClickListener {
+            //TODO
+        }
+        btAddSize.setSafeOnClickListener {
+            //TODO
+        }
     }
 
 }

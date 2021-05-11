@@ -70,10 +70,10 @@ android {
     }
 }
 
-repositories {
-    mavenCentral()
-    maven { url "https://jitpack.io" }
-}
+//repositories {
+//    mavenCentral()
+//    maven { url "https://jitpack.io" }
+//}
 
 dependencies {
     api 'com.github.tplloi:basemaster:4.4.54'

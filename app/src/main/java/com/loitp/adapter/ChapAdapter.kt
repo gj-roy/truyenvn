@@ -27,12 +27,13 @@ class ChapAdapter(
     inner class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
         fun bind(chap: Chap) {
+            //TODO expancd cllapse
             itemView.tvNoChapter.text = "${chap.noChapter}"
             itemView.tvTitle.text = chap.title
             LUIUtil.setTextFromHTML(textView = itemView.tvDescription, bodyData = chap.description)
 
             LUIUtil.setSafeOnClickListenerElastic(
-                view = itemView.layoutRoot,
+                view = itemView.btReadFull,
                 runnable = Runnable {
                     onClickRootListener?.invoke(chap, bindingAdapterPosition)
                 }

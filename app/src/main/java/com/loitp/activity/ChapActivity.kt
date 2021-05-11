@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.annotation.IsFullScreen
+import com.annotation.IsShowAdWhenExit
 import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
 import com.core.base.BaseFontActivity
@@ -31,6 +32,7 @@ import kotlinx.android.synthetic.main.view_row_item_story.view.*
 @LogTag("ChapActivity")
 @IsFullScreen(true)
 @IsSwipeActivity(true)
+@IsShowAdWhenExit(true)
 class ChapActivity : BaseFontActivity() {
 
     companion object {
@@ -39,7 +41,6 @@ class ChapActivity : BaseFontActivity() {
 
     private var story: Story? = null
     private var chapViewModel: ChapViewModel? = null
-    private var total = 0
     private var pageIndex = 0
     private var totalPage = Int.MAX_VALUE
     private var concatAdapter = ConcatAdapter()
@@ -93,8 +94,7 @@ class ChapActivity : BaseFontActivity() {
             chapAdapter?.let { na ->
                 na.onClickRootListener = { chap, _ ->
                     val intent = Intent(this, ReadActivity::class.java)
-                    intent.putExtra(ReadActivity.KEY_TOTAL, total)
-                    intent.putExtra(ReadActivity.KEY_TOTAL_PAGE, totalPage)
+                    intent.putExtra(ReadActivity.KEY_CHAP, chap)
                     startActivity(intent)
                     LActivityUtil.tranIn(this)
                 }
@@ -158,9 +158,6 @@ class ChapActivity : BaseFontActivity() {
                 val isSuccess = actionData.isSuccess
                 actionData.totalPages?.let {
                     totalPage = it
-                }
-                actionData.total?.let {
-                    total = it
                 }
 
                 if (isDoing == true) {

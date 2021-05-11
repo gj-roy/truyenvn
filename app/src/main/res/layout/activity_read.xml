@@ -1,36 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.views.layout.swipeback.SwipeBackLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeBackLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:directionMode="top"
+    app:directionMode="left"
     app:isSwipeFromEdge="false"
     app:maskAlpha="125"
     app:swipeBackFactor="0.5">
 
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/themeBackgroundColor">
+        android:background="?attr/themeBackgroundColor"
+        android:orientation="vertical">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabBackground="@color/red"
-            app:tabGravity="start"
-            app:tabIndicatorColor="@color/green"
-            app:tabMode="auto"
-            app:tabRippleColor="@color/yellow"
-            app:tabSelectedTextColor="@color/blue"
-            app:tabTextColor="@color/darkCyan" />
+            android:padding="@dimen/padding_medium"
+            android:textColor="?attr/themeTextColor"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            tools:text="@string/app_name" />
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vp"
+        <androidx.core.widget.NestedScrollView
+            style="@style/ScrollVertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/tabLayout" />
-    </RelativeLayout>
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_medium">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/themeTextColor"
+                    android:textSize="@dimen/text_medium"
+                    tools:text="@string/large_text" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </com.views.layout.swipeback.SwipeBackLayout>

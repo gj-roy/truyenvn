@@ -31,6 +31,18 @@
             android:orientation="vertical"
             android:padding="@dimen/padding_medium">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="bold" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivCover"
                 android:layout_width="@dimen/w_80"
@@ -41,17 +53,6 @@
                 app:civ_border_width="@dimen/w_1"
                 tools:src="@color/red" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="@dimen/txt_large"
-                android:textStyle="bold" />
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView

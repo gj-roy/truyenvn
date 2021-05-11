@@ -31,17 +31,16 @@
             android:orientation="vertical"
             android:padding="@dimen/padding_medium">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.views.textview.stroked.LStrokedTextView
                 android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_medium"
-                android:textStyle="bold" />
+                android:textColor="?attr/themeBackgroundColor"
+                android:textSize="@dimen/text_large"
+                app:strokeColor="?attr/themeTextColor"
+                app:strokeThickness="@dimen/w_1"
+                tools:text="@string/app_name" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivCover"

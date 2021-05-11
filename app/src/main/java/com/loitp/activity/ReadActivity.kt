@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_read.*
 class ReadActivity : BaseFontActivity() {
     //TODO animation
     //TODO text size
+    //TODO text share
     companion object {
         const val KEY_CHAP = "KEY_CHAP"
     }

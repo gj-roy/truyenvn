@@ -4,7 +4,7 @@
     android:id="@+id/swipeBackLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:directionMode="bottom"
+    app:directionMode="top"
     app:isSwipeFromEdge="false"
     app:maskAlpha="125"
     app:swipeBackFactor="0.5">

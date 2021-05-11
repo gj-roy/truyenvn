@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.annotation.IsFullScreen
 import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
-import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
 import com.core.utilities.*
 import com.loitp.R
@@ -40,6 +39,7 @@ class ChapActivity : BaseFontActivity() {
 
     private var story: Story? = null
     private var chapViewModel: ChapViewModel? = null
+    private var total = 0
     private var pageIndex = 0
     private var totalPage = Int.MAX_VALUE
     private var concatAdapter = ConcatAdapter()
@@ -92,9 +92,9 @@ class ChapActivity : BaseFontActivity() {
             chapAdapter = ChapAdapter(ArrayList())
             chapAdapter?.let { na ->
                 na.onClickRootListener = { chap, _ ->
-                    //TODO
                     val intent = Intent(this, ReadActivity::class.java)
-//                    intent.putExtra(ChapActivity.KEY_STORY, story)
+                    intent.putExtra(ReadActivity.KEY_TOTAL, total)
+                    intent.putExtra(ReadActivity.KEY_TOTAL_PAGE, totalPage)
                     startActivity(intent)
                     LActivityUtil.tranIn(this)
                 }
@@ -153,11 +153,14 @@ class ChapActivity : BaseFontActivity() {
         chapViewModel = getViewModel(ChapViewModel::class.java)
         chapViewModel?.let { mvm ->
             mvm.listStoryLiveData.observe(this, Observer { actionData ->
-                logD("loitpp <<<listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
+//                logD("loitpp listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
                 val isDoing = actionData.isDoing
                 val isSuccess = actionData.isSuccess
                 actionData.totalPages?.let {
                     totalPage = it
+                }
+                actionData.total?.let {
+                    total = it
                 }
 
                 if (isDoing == true) {
@@ -221,7 +224,7 @@ class ChapActivity : BaseFontActivity() {
     }
 
     private fun loadMore() {
-        logE("loitpp loadMore pageIndex $pageIndex, totalPage $totalPage, isLoading() ${isLoading()}")
+//        logE("loadMore pageIndex $pageIndex, totalPage $totalPage, isLoading() ${isLoading()}")
         if (pageIndex >= totalPage) {
             return
         }

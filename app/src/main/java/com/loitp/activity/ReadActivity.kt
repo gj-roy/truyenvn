@@ -21,6 +21,14 @@ import kotlinx.android.synthetic.main.activity_read.*
 @IsSwipeActivity(true)
 class ReadActivity : BaseFontActivity() {
 
+    companion object {
+        const val KEY_TOTAL = "KEY_TOTAL"
+        const val KEY_TOTAL_PAGE = "KEY_TOTAL_PAGE"
+    }
+
+    private var totalPage = 0
+    private var total = 0
+
     override fun setLayoutResourceId(): Int {
         return R.layout.activity_read
     }
@@ -28,7 +36,20 @@ class ReadActivity : BaseFontActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setupData()
         setupViews()
+
+        logD("loitpp totalPage $totalPage")
+        logD("loitpp total $total")
+    }
+
+    private fun setupData() {
+        intent?.getIntExtra(KEY_TOTAL_PAGE, 0)?.let {
+            totalPage = it
+        }
+        intent?.getIntExtra(KEY_TOTAL, 0)?.let {
+            total = it
+        }
     }
 
     private fun setupViews() {
@@ -60,7 +81,7 @@ class ReadActivity : BaseFontActivity() {
         }
 
         override fun getCount(): Int {
-            return 5
+            return total
         }
 
         override fun getPageTitle(position: Int): CharSequence? {

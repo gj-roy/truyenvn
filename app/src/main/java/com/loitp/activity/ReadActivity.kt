@@ -12,6 +12,7 @@ import com.core.utilities.LActivityUtil
 import com.core.utilities.LSocialUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
+import com.loitp.db.Db
 import com.loitp.model.Chap
 import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
 import com.views.setSafeOnClickListener
@@ -30,6 +31,7 @@ class ReadActivity : BaseFontActivity() {
 
     private var chap: Chap? = null
     private var isScrollDown = false
+    private var textSize = Db.DEFAULT_TEXT_SIZE
 
     override fun setLayoutResourceId(): Int {
         return R.layout.activity_read
@@ -48,6 +50,7 @@ class ReadActivity : BaseFontActivity() {
                 this.chap = it
             }
         }
+        textSize = Db.getTextSize()
     }
 
     private fun setupViews() {
@@ -67,6 +70,7 @@ class ReadActivity : BaseFontActivity() {
             }
         })
         tvTitle.text = chap?.title
+        setTextSize()
         LUIUtil.setTextFromHTML(
             textView = tvDescription,
             bodyData = chap?.description ?: getString(R.string.no_data)
@@ -92,11 +96,25 @@ class ReadActivity : BaseFontActivity() {
             LSocialUtil.shareApp(this)
         }
         btMinusSize.setSafeOnClickListener {
-            //TODO
+            if (textSize <= Db.DEFAULT_TEXT_SIZE / 3) {
+                return@setSafeOnClickListener
+            }
+            textSize--
+            setTextSize()
+            Db.setTextSize(textSize)
         }
         btAddSize.setSafeOnClickListener {
-            //TODO
+            if (textSize >= Db.DEFAULT_TEXT_SIZE * 3) {
+                return@setSafeOnClickListener
+            }
+            textSize++
+            setTextSize()
+            Db.setTextSize(textSize)
         }
+    }
+
+    private fun setTextSize() {
+        tvDescription.textSize = textSize
     }
 
 }

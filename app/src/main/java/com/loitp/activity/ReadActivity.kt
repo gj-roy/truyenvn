@@ -9,6 +9,7 @@ import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
 import com.core.base.BaseFontActivity
 import com.core.utilities.LActivityUtil
+import com.core.utilities.LSocialUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.model.Chap
@@ -88,7 +89,7 @@ class ReadActivity : BaseFontActivity() {
         })
 
         btShare.setSafeOnClickListener {
-            //TODO
+            LSocialUtil.shareApp(this)
         }
         btMinusSize.setSafeOnClickListener {
             //TODO

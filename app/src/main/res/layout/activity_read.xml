@@ -66,36 +66,36 @@
                 android:id="@+id/btShare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="?attr/themeBackgroundColor"
+                android:backgroundTint="?attr/themeTextColor"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_share_black_48dp"
                 app:borderWidth="0dp"
                 app:fabSize="mini"
-                app:tint="?attr/themeTextColor"
+                app:tint="?attr/themeBackgroundColor"
                 app:useCompatPadding="true" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btMinusSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="?attr/themeBackgroundColor"
+                android:backgroundTint="?attr/themeTextColor"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_remove_black_48dp"
                 app:borderWidth="0dp"
                 app:fabSize="mini"
-                app:tint="?attr/themeTextColor"
+                app:tint="?attr/themeBackgroundColor"
                 app:useCompatPadding="true" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btAddSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="?attr/themeBackgroundColor"
+                android:backgroundTint="?attr/themeTextColor"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_add_black_48dp"
                 app:borderWidth="0dp"
                 app:fabSize="mini"
-                app:tint="?attr/themeTextColor"
+                app:tint="?attr/themeBackgroundColor"
                 app:useCompatPadding="true" />
         </LinearLayout>
 

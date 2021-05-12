@@ -27,7 +27,6 @@ class ChapAdapter(
     inner class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
         fun bind(chap: Chap) {
-            //TODO expancd cllapse
             itemView.tvNoChapter.text = "${chap.noChapter}"
             itemView.tvTitle.text = chap.title
             LUIUtil.setTextFromHTML(textView = itemView.tvDescription, bodyData = chap.description)
@@ -51,6 +50,7 @@ class ChapAdapter(
         )
 
     override fun getItemCount(): Int = listChap.size
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is DataViewHolder) {
 //            logD("onBindViewHolder position $position")

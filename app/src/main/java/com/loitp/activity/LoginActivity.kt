@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_login.ivBackground
 import kotlinx.android.synthetic.main.activity_splash.*
 
 @LogTag("LoginActivity")
-@IsFullScreen(false)
+@IsFullScreen(true)
 class LoginActivity : BaseFontActivity() {
 
     private var loginViewModel: LoginViewModel? = null

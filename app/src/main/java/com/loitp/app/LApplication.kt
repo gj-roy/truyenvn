@@ -9,6 +9,7 @@ import com.data.AdmobData
 import com.loitp.R
 
 //TODO feature truyen yeu thich
+//TODO UI cardview bi overlap color tren note 20 ultra
 
 //done
 //TODO done link link_cover string

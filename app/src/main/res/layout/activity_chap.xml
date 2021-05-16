@@ -31,7 +31,26 @@
             android:id="@+id/recyclerView"
             style="@style/ScrollVertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scrollbars="none" />
+
+        <abak.tr.com.boxedverticalseekbar.BoxedVertical
+            android:id="@+id/boxedVertical"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            app:backgroundColor="@color/lightPink"
+            app:clockwise="true"
+            app:cornerRadius="@dimen/round_medium"
+            app:defaultValue="0"
+            app:imageEnabled="false"
+            app:progressColor="@color/red"
+            app:step="1"
+            app:textBottomPadding="20"
+            app:textColor="@color/white"
+            app:textEnabled="true"
+            app:textSize="@dimen/txt_small"
+            app:touchDisabled="true" />
 
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/indicatorView"

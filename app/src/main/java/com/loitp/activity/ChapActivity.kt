@@ -1,5 +1,6 @@
 package com.loitp.activity
 
+import abak.tr.com.boxedverticalseekbar.BoxedVertical
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.annotation.IsFullScreen
 import com.annotation.IsShowAdWhenExit
 import com.annotation.IsSwipeActivity
@@ -29,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_chap.recyclerView
 import kotlinx.android.synthetic.main.frm_home.*
 import kotlinx.android.synthetic.main.view_row_item_story.view.*
 
-@LogTag("ChapActivity")
+@LogTag("loitppChapActivity")
 @IsFullScreen(true)
 @IsSwipeActivity(true)
 @IsShowAdWhenExit(true)
@@ -47,6 +49,10 @@ class ChapActivity : BaseFontActivity() {
     private val loadingAdapter = LoadingAdapter()
     private var storyOverViewAdapter = StoryOverViewAdapter()
     private var chapAdapter: ChapAdapter? = null
+
+    private var tmpPositionSeekBar = 0
+    private var tmpPositionRecyclerView = 0
+    private var isOnTracking = false
 
     override fun setLayoutResourceId(): Int {
         return R.layout.activity_chap
@@ -88,7 +94,8 @@ class ChapActivity : BaseFontActivity() {
     private fun setupViews() {
 
         fun setupDataInRecyclerView() {
-            recyclerView.layoutManager = LinearLayoutManager(this)
+            val layoutManager = LinearLayoutManager(this)
+            recyclerView.layoutManager = layoutManager
 
             chapAdapter = ChapAdapter(ArrayList())
             chapAdapter?.let { na ->
@@ -112,6 +119,23 @@ class ChapActivity : BaseFontActivity() {
             }
 
             recyclerView.adapter = concatAdapter
+            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    chapAdapter?.let { adapter ->
+                        if (!isOnTracking) {
+                            val lastElementPosition = layoutManager.findLastVisibleItemPosition()
+                            if (tmpPositionRecyclerView != lastElementPosition) {
+                                logD("addOnScrollListener lastElementPosition $lastElementPosition")
+                                boxedVertical.value = adapter.itemCount - lastElementPosition
+                                tmpPositionRecyclerView = lastElementPosition
+                            }
+                        }
+                    }
+                }
+            })
 
             LUIUtil.setScrollChange(
                 recyclerView = recyclerView,
@@ -147,6 +171,33 @@ class ChapActivity : BaseFontActivity() {
             }
         })
         setupDataInRecyclerView()
+        boxedVertical.setOnBoxedPointsChangeListener(object : BoxedVertical.OnValuesChangeListener {
+            override fun onPointsChanged(boxedPoints: BoxedVertical, value: Int) {
+                chapAdapter?.let { adapter ->
+                    if (tmpPositionSeekBar != value) {
+                        if (isOnTracking) {
+                            logD("onPointsChanged $value")
+                            recyclerView.scrollToPosition(adapter.itemCount - value)
+                            tmpPositionSeekBar = value
+                        }
+                    }
+                }
+            }
+
+            override fun onStartTrackingTouch(boxedPoints: BoxedVertical) {
+                logD("onStartTrackingTouch")
+                isOnTracking = true
+            }
+
+            override fun onStopTrackingTouch(boxedPoints: BoxedVertical) {
+                logD("onStopTrackingTouch")
+                isOnTracking = false
+            }
+        })
+    }
+
+    private fun bindSeekbarMax() {
+        boxedVertical.max = chapAdapter?.itemCount?:0
     }
 
     private fun setupViewModels() {
@@ -182,6 +233,7 @@ class ChapActivity : BaseFontActivity() {
                             chapAdapter?.addData(
                                 listChap = listChap
                             )
+                            bindSeekbarMax()
                         }
                     } else {
                         val error = actionData.errorResponse

@@ -18,13 +18,12 @@ import com.views.layout.swipeback.SwipeBackLayout.OnSwipeBackListener
 import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_read.*
 
-
 @LogTag("ReadActivity")
 @IsFullScreen(false)
 @IsSwipeActivity(true)
 @IsShowAdWhenExit(true)
 class ReadActivity : BaseFontActivity() {
-    //TODO animation
+    //TODO iplm animation for better
     companion object {
         const val KEY_CHAP = "KEY_CHAP"
     }
@@ -79,14 +78,14 @@ class ReadActivity : BaseFontActivity() {
             if (scrollY > oldScrollY) {
                 if (!isScrollDown) {
                     isScrollDown = true
-                    logD("loitpp Scroll DOWN")
+//                    logD("Scroll DOWN")
                     layoutControl.visibility = View.GONE
                 }
             }
             if (scrollY < oldScrollY) {
                 if (isScrollDown) {
                     isScrollDown = false
-                    logD("loitpp Scroll UP")
+//                    logD("Scroll UP")
                     layoutControl.visibility = View.VISIBLE
                 }
             }

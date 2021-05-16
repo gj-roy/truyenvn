@@ -8,7 +8,7 @@ import com.data.ActivityData
 import com.data.AdmobData
 import com.loitp.R
 
-//TODO truyen yeu thich
+//TODO feature truyen yeu thich
 
 //done
 //TODO done link link_cover string

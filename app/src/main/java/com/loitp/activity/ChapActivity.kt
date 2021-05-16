@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_chap.recyclerView
 import kotlinx.android.synthetic.main.frm_home.*
 import kotlinx.android.synthetic.main.view_row_item_story.view.*
 
-@LogTag("loitppChapActivity")
+@LogTag("ChapActivity")
 @IsFullScreen(true)
 @IsSwipeActivity(true)
 @IsShowAdWhenExit(true)
@@ -143,7 +143,7 @@ class ChapActivity : BaseFontActivity() {
                     logD("onTop")
                 },
                 onBottom = {
-                    logD("loitpp onBottom")
+                    logD("onBottom")
                     loadMore()
                 }
             )
@@ -208,7 +208,7 @@ class ChapActivity : BaseFontActivity() {
         chapViewModel = getViewModel(ChapViewModel::class.java)
         chapViewModel?.let { mvm ->
             mvm.listStoryLiveData.observe(this, Observer { actionData ->
-//                logD("loitpp listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
+//                logD("listStoryLiveData " + BaseApplication.gson.toJson(actionData.data))
                 val isDoing = actionData.isDoing
                 val isSuccess = actionData.isSuccess
                 actionData.totalPages?.let {

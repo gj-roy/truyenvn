@@ -24,6 +24,13 @@ class ChapAdapter(
         notifyDataSetChanged()
     }
 
+    fun getChapAtPosition(position: Int): Chap? {
+        if (position < 0 || position >= listChap.size) {
+            return null
+        }
+        return listChap[position]
+    }
+
     inner class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
         fun bind(chap: Chap) {

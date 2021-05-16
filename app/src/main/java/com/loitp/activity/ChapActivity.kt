@@ -178,6 +178,8 @@ class ChapActivity : BaseFontActivity() {
                         if (isOnTracking) {
                             logD("onPointsChanged $value")
                             recyclerView.scrollToPosition(adapter.itemCount - value)
+                            tvPosChap.text =
+                                adapter.getChapAtPosition(adapter.itemCount - value)?.title ?: "-"
                             tmpPositionSeekBar = value
                         }
                     }
@@ -187,17 +189,19 @@ class ChapActivity : BaseFontActivity() {
             override fun onStartTrackingTouch(boxedPoints: BoxedVertical) {
                 logD("onStartTrackingTouch")
                 isOnTracking = true
+                tvPosChap.visibility = View.VISIBLE
             }
 
             override fun onStopTrackingTouch(boxedPoints: BoxedVertical) {
                 logD("onStopTrackingTouch")
                 isOnTracking = false
+                tvPosChap.visibility = View.GONE
             }
         })
     }
 
     private fun bindSeekbarMax() {
-        boxedVertical.max = chapAdapter?.itemCount?:0
+        boxedVertical.max = chapAdapter?.itemCount ?: 0
     }
 
     private fun setupViewModels() {

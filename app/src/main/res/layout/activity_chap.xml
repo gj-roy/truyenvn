@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.views.layout.swipeback.SwipeBackLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeBackLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,20 +35,35 @@
             android:layout_height="match_parent"
             android:scrollbars="none" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPosChap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/black50"
+            android:padding="@dimen/padding_medium"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_35"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:background="@color/transparent"
+            tools:text="1000"
+            tools:visibility="visible" />
+
         <abak.tr.com.boxedverticalseekbar.BoxedVertical
             android:id="@+id/boxedVertical"
-            android:layout_width="20dp"
+            android:layout_width="@dimen/w_10"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            app:backgroundColor="@color/lightPink"
+            app:backgroundColor="@color/transparent"
             app:clockwise="true"
             app:cornerRadius="@dimen/round_medium"
-            app:defaultValue="0"
+            app:defaultValue="50"
             app:imageEnabled="false"
-            app:progressColor="@color/red"
+            app:progressColor="@color/black50"
             app:step="1"
             app:textBottomPadding="20"
-            app:textColor="@color/white"
+            app:textColor="@color/transparent"
             app:textEnabled="true"
             app:textSize="@dimen/txt_small"
             app:touchDisabled="true" />

@@ -55,7 +55,7 @@
             android:layout_width="@dimen/w_10"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            app:backgroundColor="@color/transparent"
+            app:backgroundColor="@color/black35"
             app:clockwise="true"
             app:cornerRadius="@dimen/round_medium"
             app:defaultValue="50"
